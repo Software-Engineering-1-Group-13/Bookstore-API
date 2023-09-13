@@ -1,7 +1,7 @@
 ---
 name: API Feature Template
-about: 'BSAPI-#: short description of new feature'
-title: ''
+about: Understanding what is going to be implemented better.
+title: 'BSAPI-#: short description of new feature'
 labels: ''
 assignees: ''
 
