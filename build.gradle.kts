@@ -2,6 +2,7 @@ plugins {
 	java
 	id("org.springframework.boot") version "3.1.3"
 	id("io.spring.dependency-management") version "1.1.3"
+	id("com.diffplug.spotless") version "6.21.0"
 }
 
 group = "com.bookstore"
@@ -9,6 +10,12 @@ version = "0.0.1-SNAPSHOT"
 
 java {
 	sourceCompatibility = JavaVersion.VERSION_17
+}
+
+spotless {
+	java {
+		googleJavaFormat() // Use Google Java Format
+	}
 }
 
 configurations {
@@ -36,4 +43,8 @@ dependencies {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+
+tasks.named("check") {
+	dependsOn("spotlessApply")
 }
