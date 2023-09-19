@@ -90,4 +90,9 @@ public class WishlistService {
 
     return Optional.empty();
   }
+
+  public Optional<Wishlist> listBooksFromWishlist(Long wishlistId) {
+
+    return wishlistRepository.findById(wishlistId);
+  }
 }

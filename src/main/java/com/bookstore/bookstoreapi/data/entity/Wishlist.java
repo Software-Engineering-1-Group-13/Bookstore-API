@@ -1,5 +1,6 @@
 package com.bookstore.bookstoreapi.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -40,5 +41,6 @@ public class Wishlist {
   @ToString.Exclude
   @Builder.Default
   @ManyToMany(mappedBy = "wishlists")
+  @JsonBackReference
   private Set<Book> books = new HashSet<>();
 }

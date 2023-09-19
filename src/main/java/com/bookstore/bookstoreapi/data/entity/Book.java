@@ -1,5 +1,6 @@
 package com.bookstore.bookstoreapi.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -58,5 +59,6 @@ public class Book {
       name = "WishlistBook",
       joinColumns = @JoinColumn(name = "BookID"),
       inverseJoinColumns = @JoinColumn(name = "WishlistID"))
+  @JsonManagedReference
   private Set<Wishlist> wishlists = new HashSet<>();
 }
