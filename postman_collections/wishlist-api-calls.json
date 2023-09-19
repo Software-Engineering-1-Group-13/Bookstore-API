@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "c6da2f17-1f16-4e1e-886b-5ac94112e361",
 		"name": "BookstoreAPIs",
-		"description": "This collection is for all our test calls, which are\n\n- 6 features,\n    \n    - each feature has 4 RESTful API calls.",
+		"description": "This collection is for all our test calls, which are\n\n- 6 features,\n    \n    - 4 RESTful API calls per feature.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
 	"item": [
