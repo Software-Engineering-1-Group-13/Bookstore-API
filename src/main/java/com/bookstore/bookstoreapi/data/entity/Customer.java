@@ -8,8 +8,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -44,5 +44,5 @@ public class Customer {
   @ToString.Exclude
   @Builder.Default
   @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-  private List<Wishlist> wishlists = new ArrayList<>();
+  private Set<Wishlist> wishlists = new HashSet<>();
 }

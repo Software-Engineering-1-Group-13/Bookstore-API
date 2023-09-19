@@ -11,18 +11,20 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity
 @Table(name = "Book")
 @Data
+@EqualsAndHashCode(of = {"id", "title"})
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -33,7 +35,7 @@ public class Book {
   @Column(name = "BookID")
   private Long id;
 
-  @Column(name = "Title", nullable = false, unique = true)
+  @Column(name = "Title", nullable = false)
   private String title;
 
   @Column(name = "ISBN", nullable = false, unique = true)
@@ -56,5 +58,5 @@ public class Book {
       name = "WishlistBook",
       joinColumns = @JoinColumn(name = "BookID"),
       inverseJoinColumns = @JoinColumn(name = "WishlistID"))
-  private List<Wishlist> wishlists = new ArrayList<>();
+  private Set<Wishlist> wishlists = new HashSet<>();
 }

@@ -1,7 +1,9 @@
 package com.bookstore.bookstoreapi.data.service;
 
+import com.bookstore.bookstoreapi.data.entity.Book;
 import com.bookstore.bookstoreapi.data.entity.Customer;
 import com.bookstore.bookstoreapi.data.entity.Wishlist;
+import com.bookstore.bookstoreapi.data.repository.BookRepository;
 import com.bookstore.bookstoreapi.data.repository.CustomerRepository;
 import com.bookstore.bookstoreapi.data.repository.WishlistRepository;
 import java.util.List;
@@ -14,6 +16,7 @@ public class WishlistService {
 
   @Autowired private WishlistRepository wishlistRepository;
   @Autowired private CustomerRepository customerRepository;
+  @Autowired private BookRepository bookRepository;
 
   public Optional<Wishlist> createWishlist(String wishlistName, Long userID) {
 
@@ -36,5 +39,30 @@ public class WishlistService {
     wishlistRepository.save(newWishlist);
 
     return Optional.of(newWishlist);
+  }
+
+  public Optional<Wishlist> addBookToWishlist(Long bookID, Long wishlistID) {
+
+    Optional<Book> bookOptional = bookRepository.findById(bookID);
+    Optional<Wishlist> wishlistOptional = wishlistRepository.findById(wishlistID);
+
+    if (bookOptional.isEmpty() || wishlistOptional.isEmpty()) {
+      return Optional.empty();
+    }
+
+    Book book = bookOptional.get();
+    Wishlist wishlist = wishlistOptional.get();
+
+    if (wishlist.getBooks().contains(book)) {
+      return Optional.empty();
+    }
+
+    wishlist.getBooks().add(book);
+    book.getWishlists().add(wishlist);
+
+    wishlistRepository.save(wishlist);
+    bookRepository.save(book);
+
+    return Optional.of(wishlist);
   }
 }
