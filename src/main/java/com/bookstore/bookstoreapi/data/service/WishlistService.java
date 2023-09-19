@@ -65,4 +65,29 @@ public class WishlistService {
 
     return Optional.of(wishlist);
   }
+
+  public Optional<Wishlist> removeBookFromWishlist(Long bookID, Long wishlistID) {
+
+    Optional<Book> bookOptional = bookRepository.findById(bookID);
+    Optional<Wishlist> wishlistOptional = wishlistRepository.findById(wishlistID);
+
+    if (bookOptional.isEmpty() || wishlistOptional.isEmpty()) {
+      return Optional.empty();
+    }
+
+    Book book = bookOptional.get();
+    Wishlist wishlist = wishlistOptional.get();
+
+    if (wishlist.getBooks().contains(book)) {
+      wishlist.getBooks().remove(book);
+      book.getWishlists().remove(wishlist);
+
+      wishlistRepository.save(wishlist);
+      bookRepository.save(book);
+
+      return Optional.of(wishlist);
+    }
+
+    return Optional.empty();
+  }
 }
