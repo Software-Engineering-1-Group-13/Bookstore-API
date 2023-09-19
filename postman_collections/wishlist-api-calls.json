@@ -118,7 +118,7 @@
 					"description": "## Feature Overview\n\n### Summary\n\nAdd functionality to create a wishlist for a user with a unique name.\n\n### Rationale\n\n- **Motivation**: Users should be able to curate and personalize a list of books they're interested in.\n    \n- **Functionality**: This feature will allow users to create a wishlist by providing their user ID and a wishlist name.\n    \n- **Impact**: Mainly affects user-related services and the `wishlist` database table.\n    \n\n### Acceptance Criteria\n\n- New endpoint: `POST /wishlist`\n    \n- Parameters Sent: `Wishlist name`, `User Id`\n    \n- Successful response: HTTP 201 Created with no content\n    \n    - If User does not exist return `404 Not Found`\n        \n    - If wishlistName exists return `500 Internal Server Error`\n        \n\n### Additional Information\n\nEnsure wishlist names are unique for each user. Testing should cover scenarios where a user tries to create a wishlist with a name that already exists."
 				},
 				{
-					"name": "Feature 2 - add books to wishlist",
+					"name": "API 2 - add books to wishlist",
 					"item": [
 						{
 							"name": "200 - adds book to wishlist",
