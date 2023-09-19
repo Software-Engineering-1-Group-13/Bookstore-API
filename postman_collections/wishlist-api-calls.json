@@ -261,7 +261,7 @@
 					"description": "## Feature Overview\n\n### Summary\n\nIntroduce functionality to add a book to a user's existing wishlist.\n\n### Rationale\n\n- **Motivation**: Users need to be able to populate their wishlists with books they find appealing.\n    \n- **Functionality**: By providing a book ID and a wishlist ID, the selected book will be added to the specified wishlist.\n    \n- **Impact**: Affects `wishlist`, `books`, and the intermediary table that handles the many-to-many relation.\n    \n\n### Acceptance Criteria\n\n- New endpoint: `POST /wishlist/addBook`\n    \n- Parameters Sent: `Book Id`, `Wishlist Id`\n    \n- Successful response: HTTP 200 OK with no content\n    \n\n### Additional Information\n\nTests should handle scenarios where a book is already in the wishlist or if the provided book or wishlist IDs don't exist."
 				},
 				{
-					"name": "Feature 3 - remove book from wishlist",
+					"name": "API 3 - remove book from wishlist",
 					"item": [
 						{
 							"name": "200 - removes first book",
