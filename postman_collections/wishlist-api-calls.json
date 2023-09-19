@@ -404,7 +404,7 @@
 					"description": "## Feature Overview\n\n### Summary\n\nFacilitate the removal of a book from a user's wishlist.\n\n### Rationale\n\n- **Motivation**: Sometimes, users change their minds and might want to remove books from their wishlists.\n    \n- **Functionality**: Using the book ID and wishlist ID, the API will handle the removal process.\n    \n- **Impact**: Affects `wishlist`, `books`, and their intermediary relation.\n    \n\n### Acceptance Criteria\n\n- New endpoint: `DELETE /wishlist/removeBook`\n    \n- Parameters Sent: `Book Id`, `Wishlist Id`\n    \n- Successful response: HTTP 200 OK with no content\n    \n\n### Additional Information\n\nEnsure that testing covers situations where the book isn't initially in the wishlist or the provided IDs are invalid."
 				},
 				{
-					"name": "Feature 4 - List books in wishlist",
+					"name": "API 4 - List books in wishlist",
 					"item": [
 						{
 							"name": "200 - check existing wishlist",
