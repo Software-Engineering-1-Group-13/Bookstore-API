@@ -434,7 +434,7 @@
 			"description": "## Feature Overview\n\n### Summary\n\nProvide a way to retrieve all books in a user's wishlist.\n\n### Rationale\n\n- **Motivation**: Users will want to view the books they've added to their wishlists.\n    \n- **Functionality**: By giving the wishlist ID, a JSON list of all books in that wishlist will be returned.\n    \n- **Impact**: Affects the `wishlist` and `books` tables, and possibly other services that utilize book data.\n    \n\n### Acceptance Criteria\n\n- New endpoint: `GET /wishlist/books`\n    \n- Parameters Sent: `Wishlist Id`\n    \n- Successful response: JSON list of books\n    \n\n### Additional Information\n\nConsider pagination if wishlists can get extensive. Also, ensure that the returned data is structured efficiently for front-end consumption."
 		},
 		{
-			"name": "New Folder",
+			"name": "Wishlist",
 			"item": [],
 			"id": "27c91eb0-729f-41d4-923c-75dff48b2586"
 		}
