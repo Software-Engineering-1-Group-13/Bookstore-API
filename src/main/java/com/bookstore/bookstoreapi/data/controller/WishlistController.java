@@ -26,4 +26,16 @@ public class WishlistController {
 
     return new ResponseEntity<>(HttpStatus.CREATED);
   }
+
+  @PostMapping("/wishlist/book")
+  public ResponseEntity<Void> addBookToWishlist(
+      @RequestParam Long bookID, @RequestParam Long wishlistID) {
+
+    Optional<Wishlist> addedBookToWishlist = wishlistService.addBookToWishlist(bookID, wishlistID);
+    if (addedBookToWishlist.isEmpty()) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    return new ResponseEntity<>(HttpStatus.OK);
+  }
 }

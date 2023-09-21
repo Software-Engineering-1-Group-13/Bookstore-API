@@ -9,8 +9,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -40,5 +40,5 @@ public class Wishlist {
   @ToString.Exclude
   @Builder.Default
   @ManyToMany(mappedBy = "wishlists")
-  private List<Book> books = new ArrayList<>();
+  private Set<Book> books = new HashSet<>();
 }
