@@ -24,5 +24,10 @@ List the specific conditions that must be met for this feature to be considered 
 - Any changes to the database schema.
 - Performance criteria or constraints.
 
+### Acceptance Test Cases:
+- Test Case #1: If this... then that...
+- Test Case #2: if this... then that...
+- ...
+
 ### Additional Information
 Include any other relevant notes, dependencies, or concerns related to this feature. This could be related to testing, potential risks, or any other important context.
