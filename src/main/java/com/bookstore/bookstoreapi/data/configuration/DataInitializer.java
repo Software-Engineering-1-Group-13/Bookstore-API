@@ -65,6 +65,16 @@ public class DataInitializer {
       bookRepository.save(book1);
       bookRepository.save(book2);
       bookRepository.save(book3);
+
+      johnWishList.getBooks().add(book1);
+      book1.getWishlists().add(johnWishList);
+      wishlistRepository.save(johnWishList);
+      bookRepository.save(book1);
+
+      johnWishList.getBooks().add(book2);
+      book2.getWishlists().add(johnWishList);
+      wishlistRepository.save(johnWishList);
+      bookRepository.save(book2);
     };
   }
 }
