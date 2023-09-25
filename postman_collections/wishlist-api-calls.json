@@ -1,0 +1,444 @@
+{
+	"info": {
+		"_postman_id": "c6da2f17-1f16-4e1e-886b-5ac94112e361",
+		"name": "BookstoreAPIs",
+		"description": "This collection is for all our test calls, which are\n\n- 6 features,\n    \n    - 4 RESTful API calls per feature.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Wishlist",
+			"item": [
+				{
+					"name": "API 1 - create wishlists",
+					"item": [
+						{
+							"name": "201 - created wishlist",
+							"id": "762b5ae5-5f99-45d8-bc97-edf345a13c80",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/wishlist?wishlistName=My Cool Books&userID=1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"wishlist"
+									],
+									"query": [
+										{
+											"key": "wishlistName",
+											"value": "My Cool Books"
+										},
+										{
+											"key": "userID",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "404 - UserID not found",
+							"id": "66237a26-f278-4044-b770-74a2053526d2",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/wishlist?wishlistName=MyCoolBooks&userID=10",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"wishlist"
+									],
+									"query": [
+										{
+											"key": "wishlistName",
+											"value": "MyCoolBooks",
+											"type": "text"
+										},
+										{
+											"key": "userID",
+											"value": "10",
+											"type": "text"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "500 - wishlist exits",
+							"id": "3c7a299e-9891-44ab-911e-fc9bf21f1f05",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/wishlist?wishlistName=John's Favorites&userID=1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"wishlist"
+									],
+									"query": [
+										{
+											"key": "wishlistName",
+											"value": "John's Favorites"
+										},
+										{
+											"key": "userID",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "1032026e-2c86-4640-ba66-e6c7e07ad76c",
+					"description": "## Feature Overview\n\n### Summary\n\nAdd functionality to create a wishlist for a user with a unique name.\n\n### Rationale\n\n- **Motivation**: Users should be able to curate and personalize a list of books they're interested in.\n    \n- **Functionality**: This feature will allow users to create a wishlist by providing their user ID and a wishlist name.\n    \n- **Impact**: Mainly affects user-related services and the `wishlist` database table.\n    \n\n### Acceptance Criteria\n\n- New endpoint: `POST /wishlist`\n    \n- Parameters Sent: `Wishlist name`, `User Id`\n    \n- Successful response: HTTP 201 Created with no content\n    \n    - If User does not exist return `404 Not Found`\n        \n    - If wishlistName exists return `500 Internal Server Error`\n        \n\n### Additional Information\n\nEnsure wishlist names are unique for each user. Testing should cover scenarios where a user tries to create a wishlist with a name that already exists."
+				},
+				{
+					"name": "API 2 - add books to wishlist",
+					"item": [
+						{
+							"name": "200 - adds book to wishlist",
+							"id": "3922406e-898e-422f-9c39-6c52d479a238",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/wishlist/book?bookID=3&wishlistID=1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"wishlist",
+										"book"
+									],
+									"query": [
+										{
+											"key": "bookID",
+											"value": "3"
+										},
+										{
+											"key": "wishlistID",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "200 - adds second book",
+							"id": "1d7d887e-bd75-42ea-9d56-729e68afbf37",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/wishlist/book?bookID=1&wishlistID=1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"wishlist",
+										"book"
+									],
+									"query": [
+										{
+											"key": "bookID",
+											"value": "1"
+										},
+										{
+											"key": "wishlistID",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 - non-existent bookID",
+							"id": "41f91ea8-4a9c-4f94-900d-bb461e54fad6",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/wishlist/book?bookID=10&wishlistID=1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"wishlist",
+										"book"
+									],
+									"query": [
+										{
+											"key": "bookID",
+											"value": "10"
+										},
+										{
+											"key": "wishlistID",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "400 - non-existent wishlistID",
+							"id": "9cf789d6-4354-49b9-bc18-a947d6681a44",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/wishlist/book?bookID=1&wishlistID=10",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"wishlist",
+										"book"
+									],
+									"query": [
+										{
+											"key": "bookID",
+											"value": "1"
+										},
+										{
+											"key": "wishlistID",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "9f023c74-8cdd-407e-b84c-25ba6f1cae60",
+					"description": "## Feature Overview\n\n### Summary\n\nIntroduce functionality to add a book to a user's existing wishlist.\n\n### Rationale\n\n- **Motivation**: Users need to be able to populate their wishlists with books they find appealing.\n    \n- **Functionality**: By providing a book ID and a wishlist ID, the selected book will be added to the specified wishlist.\n    \n- **Impact**: Affects `wishlist`, `books`, and the intermediary table that handles the many-to-many relation.\n    \n\n### Acceptance Criteria\n\n- New endpoint: `POST /wishlist/addBook`\n    \n- Parameters Sent: `Book Id`, `Wishlist Id`\n    \n- Successful response: HTTP 200 OK with no content\n    \n\n### Additional Information\n\nTests should handle scenarios where a book is already in the wishlist or if the provided book or wishlist IDs don't exist."
+				},
+				{
+					"name": "API 3 - remove book from wishlist",
+					"item": [
+						{
+							"name": "200 - removes first book",
+							"id": "9da21973-164c-444c-8d55-4ecee43c48d6",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/wishlist/removeBook?bookID=1&wishlistID=1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"wishlist",
+										"removeBook"
+									],
+									"query": [
+										{
+											"key": "bookID",
+											"value": "1"
+										},
+										{
+											"key": "wishlistID",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "200 - removes second book",
+							"id": "c6f64b57-5e45-4515-9ace-b7b409b520a9",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/wishlist/removeBook?bookID=2&wishlistID=1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"wishlist",
+										"removeBook"
+									],
+									"query": [
+										{
+											"key": "bookID",
+											"value": "2"
+										},
+										{
+											"key": "wishlistID",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "404 - remove non-existent book",
+							"id": "89f8e1ef-08e6-41d8-b406-5f4aad260a48",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/wishlist/removeBook?bookID=10&wishlistID=1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"wishlist",
+										"removeBook"
+									],
+									"query": [
+										{
+											"key": "bookID",
+											"value": "10"
+										},
+										{
+											"key": "wishlistID",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "404 - remove from non-existent wishlist",
+							"id": "e18db7a3-17f4-49bd-b99f-1ab0fbfc2b73",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/wishlist/removeBook?bookID=1&wishlistID=10",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"wishlist",
+										"removeBook"
+									],
+									"query": [
+										{
+											"key": "bookID",
+											"value": "1"
+										},
+										{
+											"key": "wishlistID",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"id": "f19d7e42-265b-4297-9540-51edef844238",
+					"description": "## Feature Overview\n\n### Summary\n\nFacilitate the removal of a book from a user's wishlist.\n\n### Rationale\n\n- **Motivation**: Sometimes, users change their minds and might want to remove books from their wishlists.\n    \n- **Functionality**: Using the book ID and wishlist ID, the API will handle the removal process.\n    \n- **Impact**: Affects `wishlist`, `books`, and their intermediary relation.\n    \n\n### Acceptance Criteria\n\n- New endpoint: `DELETE /wishlist/removeBook`\n    \n- Parameters Sent: `Book Id`, `Wishlist Id`\n    \n- Successful response: HTTP 200 OK with no content\n    \n\n### Additional Information\n\nEnsure that testing covers situations where the book isn't initially in the wishlist or the provided IDs are invalid."
+				},
+				{
+					"name": "API 4 - List books in wishlist",
+					"item": [
+						{
+							"name": "200 - check existing wishlist",
+							"id": "f986ce42-7d99-4fd7-8685-1527ed3ef79c",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:8080/wishlist/1/books"
+							},
+							"response": []
+						},
+						{
+							"name": "404 - check non-existing wishlist",
+							"id": "9e7f1efc-9388-432c-aedc-4694ecc938f6",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:8080/wishlist/10/books"
+							},
+							"response": []
+						}
+					],
+					"id": "6bfcd2e3-2647-45eb-ae1d-dd27e2a46a0a",
+					"description": "## Feature Overview\n\n### Summary\n\nProvide a way to retrieve all books in a user's wishlist.\n\n### Rationale\n\n- **Motivation**: Users will want to view the books they've added to their wishlists.\n    \n- **Functionality**: By giving the wishlist ID, a JSON list of all books in that wishlist will be returned.\n    \n- **Impact**: Affects the `wishlist` and `books` tables, and possibly other services that utilize book data.\n    \n\n### Acceptance Criteria\n\n- New endpoint: `GET /wishlist/books`\n    \n- Parameters Sent: `Wishlist Id`\n    \n- Successful response: JSON list of books\n    \n\n### Additional Information\n\nConsider pagination if wishlists can get extensive. Also, ensure that the returned data is structured efficiently for front-end consumption."
+				}
+			],
+			"id": "27c91eb0-729f-41d4-923c-75dff48b2586",
+			"description": "Management \n\nUsers can create and have 3 different wish lists which can have books moved to from the primary list.\n\n<img src=\"https://content.pstmn.io/e28b7e09-6363-4157-8ca5-c926d4e2be44/aW1hZ2UucG5n\" alt=\"\" height=\"668\" width=\"960\">"
+		}
+	]
+}
