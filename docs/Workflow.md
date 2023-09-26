@@ -2,11 +2,12 @@
 
 ## Table of Contents
 1. [Cloning the Repository](#cloning-the-repository)
-2. [Creating an Issue](#creating-an-issue)
-3. [Creating a Branch](#creating-a-branch)
-4. [Switching to the New Branch](#switching-to-the-new-branch)
-5. [Making Changes and Pushing Code](#making-changes-and-pushing-code)
-6. [Creating a Pull Request](#creating-a-pull-request)
+2. [How to Pull Branch Updates](#how-to-pull-branch-updates)
+3. [Creating an Issue](#creating-an-issue)
+4. [Creating a Branch](#creating-a-branch)
+5. [Switching to the New Branch](#switching-to-the-new-branch)
+6. [Making Changes and Pushing Code](#making-changes-and-pushing-code)
+7. [Creating a Pull Request](#creating-a-pull-request)
 
 ---
 
@@ -20,6 +21,18 @@ If you haven't already cloned the repository:
     ```bash
     git clone https://github.com/Software-Engineering-1-Group-13/Bookstore-API.git
     ```
+
+---
+
+## How to Pull Branch Updates
+
+To receive the changes that were made to all the branches since the last time you pulled/cloned the repo use:
+
+```shell
+  git pull
+```
+
+**IMPORTANT**: If you are using this git command while working on a same branch with colleague, you might get merge conflicts if your colleague has pushed any code.  
 
 ---
 
