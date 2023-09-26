@@ -30,12 +30,17 @@ public class Rating {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "RatingID")
     private Long id;
+    
+    @Column(name = "Rating")
+    @Min(1)
+    @Max(5)
+    private Integer rating;
 
     @Column(name = "Book")
+    @ManyToOne
     private Book book;
 
-    @Column(name = "Stars")
-    private Integer stars;
-
-
+    @Column
+    @ManyToOne
+    private User user;
 }
