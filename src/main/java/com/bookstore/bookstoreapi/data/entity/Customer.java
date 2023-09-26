@@ -43,13 +43,13 @@ public class Customer {
 
   @Column(name = "Ratings", nullable = true) //nullable = true since the user doesn't HAVE to leave ratings?
   private ArrayList<Rating> ratings = new ArrayList<>();
+
+  @Column(name = "Rating")
+  @OneToMany
+  private Rating rating;
   
   @ToString.Exclude
   @Builder.Default
   @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
   private Set<Wishlist> wishlists = new HashSet<>();
-
-  @Column(name = "Rating")
-  @OneToMany
-  private Rating rating;
 }
