@@ -28,9 +28,9 @@ If you haven't already cloned the repository:
 
 To receive the changes that were made to all the branches since the last time you pulled/cloned the repo use:
 
-```shell
-  git pull
-```
+   ```bash
+   git pull
+   ```
 
 **IMPORTANT**: If you are using this git command while working on a same branch with colleague, you might get merge conflicts if your colleague has pushed any code.  
 
