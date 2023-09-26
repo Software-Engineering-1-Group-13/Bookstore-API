@@ -41,6 +41,9 @@ public class Customer {
   @Column(name = "Address", nullable = false)
   private String address;
 
+  @Column(name = "Ratings", nullable = true) //nullable = true since the user doesn't HAVE to leave ratings?
+  private ArrayList<Rating> ratings = new ArrayList<>();
+  
   @ToString.Exclude
   @Builder.Default
   @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
