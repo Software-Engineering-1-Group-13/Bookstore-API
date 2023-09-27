@@ -24,10 +24,7 @@ public class RatingService {
         Optional<Customer> userOptional = customerRepository.findById(userID);
         Optional<Book> bookOptional = bookRepository.findById(bookID);
 
-        if (userOptional.isEmpty()) {
-            return Optional.empty();
-        }
-        if(bookOptional.isEmpty()) {
+        if (userOptional.isEmpty() || bookOptional.isEmpty()) {
             return Optional.empty();
         }
 
