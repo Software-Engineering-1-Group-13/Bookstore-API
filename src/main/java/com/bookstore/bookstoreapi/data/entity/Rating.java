@@ -9,9 +9,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
-import jakarta.persistence.Table;
 import java.util.HashSet;
 import java.util.Set;
 import lombok.AllArgsConstructor;
@@ -19,6 +19,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+
 
 @Entity
 @Table(name = "Rating")
@@ -32,17 +33,17 @@ public class Rating {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "RatingID")
     private Long id;
-    
+
     @Column(name = "Rating")
     @Min(1)
     @Max(5)
     private Integer rating;
 
-    @Column(name = "Book")
     @ManyToOne
+    @JoinColumn(name = "Book")
     private Book book;
 
-    @Column
     @ManyToOne
-    private User user;
+    @JoinColumn(name = "UserID", insertable = false, updatable = false)
+    private Customer customer;
 }
