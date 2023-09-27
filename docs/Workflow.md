@@ -1,8 +1,8 @@
 # GitHub Workflow Guide for Teammates
 
 ## Table of Contents
-1. [Cloning the Repository](#cloning-the-repository)
-2. [How to Pull Branch Updates](#how-to-pull-branch-updates)
+1. [Folder Management](#folder-management-guidelines)
+2. [Cloning the Repository](#cloning-the-repository)
 3. [Creating an Issue](#creating-an-issue)
 4. [Creating a Branch](#creating-a-branch)
 5. [Switching to the New Branch](#switching-to-the-new-branch)
@@ -10,6 +10,62 @@
 7. [Creating a Pull Request](#creating-a-pull-request)
 
 ---
+
+## Folder Management Guidelines
+
+Proper folder management is essential for streamlining the development workflow. Follow these steps for each issue you work on:
+
+### Step 1: Create Root Project Folder
+
+Firstly, create a root folder for your project. The folder name should match the name of the GitHub repository. To do this via terminal, run:
+```bash
+mkdir Bookstore-API-Project
+```
+
+### Step 2: Navigate to Root Folder
+
+Get inside your root folder using the `cd` command:
+```bash
+cd Bookstore-API-Project
+```
+
+### Step 3: Create Issue-Specific Folder
+
+Inside the root folder, create a new folder with the same name as your issue prefix. For instance, if you are working on issue `BSAPI-10`, create a folder named `BSAPI-10`:
+```bash
+mkdir BSAPI-10
+```
+
+Then get inside of that folder:
+```bash
+cd BSAPI-10
+```
+
+### Step 4: Clone the Repository
+
+For every new issue you work on, clone the repository again. Given that this is a small-scale project, cloning multiple times should not be a problem. To clone, run:
+```bash
+git clone https://github.com/Software-Engineering-1-Group-13/Bookstore-API.git
+```
+
+### Step 5: Navigate to the Repository Folder
+
+Navigate to the cloned repository:
+```bash
+cd Bookstore-API
+```
+
+### Step 6: Open the Project in IntelliJ IDEA
+
+Finally, open the repository folder through IntelliJ IDEA. This will automatically download any dependencies and set up the project for you.
+
+To open the project, either:
+- Use the IntelliJ IDEA interface and navigate to `File -> Open`, then choose the `Bookstore-API` folder.
+- Or drag and drop the `Bookstore-API` folder into IntelliJ IDEA.
+
+By following these steps, you'll maintain a clean and organized workspace for each issue you tackle.
+
+
 
 ## Cloning the Repository
 
