@@ -41,12 +41,10 @@ public class Customer {
   @Column(name = "Address", nullable = false)
   private String address;
 
-  @Column(name = "Ratings", nullable = true) //nullable = true since the user doesn't HAVE to leave ratings?
-  private ArrayList<Rating> ratings = new ArrayList<>();
-
-  @Column(name = "Rating")
+  @Column(name = "Ratings", nullable = true)
   @OneToMany
-  private Rating rating;
+  @Builder.Default
+  private Set<Rating> ratings = new HashSet<>();
   
   @ToString.Exclude
   @Builder.Default
