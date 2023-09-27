@@ -86,6 +86,8 @@ public class DataInitializer {
       john.getRatings().add(rating1);
       ratingRepository.save(rating1);
       customerRepository.save(john);
+      book1.getRatings().add(rating1);
+      bookRepository.save(book1);
     };
   }
 }
