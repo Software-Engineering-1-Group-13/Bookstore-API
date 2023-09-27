@@ -65,7 +65,7 @@ To open the project, either:
 
 By following these steps, you'll maintain a clean and organized workspace for each issue you tackle.
 
-
+---
 
 ## Cloning the Repository
 
