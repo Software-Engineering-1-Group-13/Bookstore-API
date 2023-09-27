@@ -12,6 +12,8 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToOne;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -21,6 +23,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+
 
 @Entity
 @Table(name = "Book")
@@ -52,13 +55,18 @@ public class Book {
   @Column(name = "StockCount", nullable = false)
   private Integer stockCount;
 
+  @OneToMany(mappedBy = "book")
+  @Builder.Default
+  private Set<Rating> ratings = new HashSet<>();
+
   @ToString.Exclude
   @Builder.Default
   @ManyToMany
   @JoinTable(
-      name = "WishlistBook",
-      joinColumns = @JoinColumn(name = "BookID"),
-      inverseJoinColumns = @JoinColumn(name = "WishlistID"))
+          name = "WishlistBook",
+          joinColumns = @JoinColumn(name = "BookID"),
+          inverseJoinColumns = @JoinColumn(name = "WishlistID"))
   @JsonManagedReference
   private Set<Wishlist> wishlists = new HashSet<>();
 }
+
