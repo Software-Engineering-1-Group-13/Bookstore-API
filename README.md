@@ -9,6 +9,10 @@
 - Node.js: [Node.js link](https://nodejs.org/en/download) - **CURRENTLY NOT NEEDED**
 - PostgreSQL: [PostgreSQL link](https://www.postgresql.org/download/) - **CURRENTLY NOT NEEDED**
 
+### Workflow
+
+- For more details on our workflow, check out our [Workflow Documentation](docs/Workflow.md)
+
 ### Initial: How to start the app
 
 After installing all the required software, do the following:
