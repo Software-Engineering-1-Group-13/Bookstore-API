@@ -1,8 +1,8 @@
 ---
-name: API Feature Template
+name: 'Bookstore-API: Feature Template'
 about: Understanding what is going to be implemented better.
 title: 'BSAPI-#: short description of new feature'
-labels: ''
+labels: Feature
 assignees: ''
 
 ---
@@ -25,8 +25,8 @@ List the specific conditions that must be met for this feature to be considered 
 - Performance criteria or constraints.
 
 ### Acceptance Test Cases:
-- Test Case #1: If this... then that...
-- Test Case #2: if this... then that...
+- Test Case 1: If this... then that...
+- Test Case 2: if this... then that...
 - ...
 
 ### Additional Information
