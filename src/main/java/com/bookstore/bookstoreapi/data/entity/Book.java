@@ -1,19 +1,14 @@
 package com.bookstore.bookstoreapi.data.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.ManyToOne;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -22,8 +17,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
-
 
 @Entity
 @Table(name = "Book")
@@ -55,18 +48,16 @@ public class Book {
   @Column(name = "StockCount", nullable = false)
   private Integer stockCount;
 
-  @OneToMany(mappedBy = "book")
-  @Builder.Default
-  private Set<Rating> ratings = new HashSet<>();
+  @OneToMany @Builder.Default private Set<Rating> ratings = new HashSet<>();
 
-  @ToString.Exclude
+  /*@ToString.Exclude
   @Builder.Default
   @ManyToMany
   @JoinTable(
-          name = "WishlistBook",
-          joinColumns = @JoinColumn(name = "BookID"),
-          inverseJoinColumns = @JoinColumn(name = "WishlistID"))
+      name = "WishlistBook",
+      joinColumns = @JoinColumn(name = "BookID"),
+      inverseJoinColumns = @JoinColumn(name = "WishlistID"))
   @JsonManagedReference
   private Set<Wishlist> wishlists = new HashSet<>();
+   */
 }
-
