@@ -1,4 +1,4 @@
-/*package com.bookstore.bookstoreapi.data.entity;
+package com.bookstore.bookstoreapi.data.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Column;
@@ -44,4 +44,3 @@ public class Wishlist {
   @JsonBackReference
   private Set<Book> books = new HashSet<>();
 }
- */
