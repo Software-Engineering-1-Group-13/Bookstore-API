@@ -50,7 +50,7 @@ public class Book {
 
   @OneToMany @Builder.Default private Set<Rating> ratings = new HashSet<>();
 
-  /*@ToString.Exclude
+  @ToString.Exclude
   @Builder.Default
   @ManyToMany
   @JoinTable(
@@ -59,5 +59,4 @@ public class Book {
       inverseJoinColumns = @JoinColumn(name = "WishlistID"))
   @JsonManagedReference
   private Set<Wishlist> wishlists = new HashSet<>();
-   */
 }
