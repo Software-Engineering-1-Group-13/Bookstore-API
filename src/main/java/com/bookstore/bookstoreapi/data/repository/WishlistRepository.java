@@ -1,4 +1,4 @@
-/*package com.bookstore.bookstoreapi.data.repository;
+package com.bookstore.bookstoreapi.data.repository;
 
 import com.bookstore.bookstoreapi.data.entity.Customer;
 //import com.bookstore.bookstoreapi.data.entity.Wishlist;
@@ -17,4 +17,3 @@ public interface WishlistRepository extends JpaRepository<Wishlist, Long> {
    *
   List<Wishlist> findByCustomerAndName(Customer customer, String wishlistName);
 }
-*/
