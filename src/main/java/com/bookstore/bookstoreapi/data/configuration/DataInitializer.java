@@ -3,11 +3,11 @@ package com.bookstore.bookstoreapi.data.configuration;
 import com.bookstore.bookstoreapi.data.entity.Book;
 import com.bookstore.bookstoreapi.data.entity.Customer;
 import com.bookstore.bookstoreapi.data.entity.Rating;
-// import com.bookstore.bookstoreapi.data.entity.Wishlist;
+import com.bookstore.bookstoreapi.data.entity.Wishlist;
 import com.bookstore.bookstoreapi.data.repository.BookRepository;
 import com.bookstore.bookstoreapi.data.repository.CustomerRepository;
 import com.bookstore.bookstoreapi.data.repository.RatingRepository;
-// import com.bookstore.bookstoreapi.data.repository.WishlistRepository;
+import com.bookstore.bookstoreapi.data.repository.WishlistRepository;
 import java.text.SimpleDateFormat;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -21,7 +21,7 @@ public class DataInitializer {
   @Bean
   public CommandLineRunner initData(
       CustomerRepository customerRepository,
-      // WishlistRepository wishlistRepository,
+      WishlistRepository wishlistRepository,
       BookRepository bookRepository,
       RatingRepository ratingRepository) {
     return args -> {
@@ -39,11 +39,10 @@ public class DataInitializer {
       jane.setAddress("12345 non-Random st");
       customerRepository.save(jane);
 
-      /*Wishlist johnWishList = new Wishlist();
+      Wishlist johnWishList = new Wishlist();
       johnWishList.setName("John's Favorites");
       johnWishList.setCustomer(john);
       wishlistRepository.save(johnWishList);
-       */
 
       Book book1 = new Book();
       book1.setTitle("A Journey to the Center of the Earth");
@@ -70,7 +69,7 @@ public class DataInitializer {
       bookRepository.save(book2);
       bookRepository.save(book3);
 
-      /*johnWishList.getBooks().add(book1);
+      johnWishList.getBooks().add(book1);
       book1.getWishlists().add(johnWishList);
       wishlistRepository.save(johnWishList);
       bookRepository.save(book1);
@@ -79,7 +78,6 @@ public class DataInitializer {
       book2.getWishlists().add(johnWishList);
       wishlistRepository.save(johnWishList);
       bookRepository.save(book2);
-       */
 
       Rating rating1 = new Rating();
       rating1.setCustomer(john);
