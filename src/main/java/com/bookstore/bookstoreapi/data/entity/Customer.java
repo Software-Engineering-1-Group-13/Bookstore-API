@@ -1,10 +1,5 @@
 package com.bookstore.bookstoreapi.data.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,8 +12,8 @@ import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Entity
 @Table(name = "Customer")
@@ -45,12 +40,15 @@ public class Customer {
   @Column(name = "Address", nullable = false)
   private String address;
 
+  @EqualsAndHashCode.Exclude
   @OneToMany(mappedBy = "customer")
   @Builder.Default
   private Set<Rating> ratings = new HashSet<>();
-  
+
+  /*
   @ToString.Exclude
   @Builder.Default
   @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
   private Set<Wishlist> wishlists = new HashSet<>();
+   */
 }
