@@ -45,10 +45,8 @@ public class Customer {
   @Builder.Default
   private Set<Rating> ratings = new HashSet<>();
 
-  /*
   @ToString.Exclude
   @Builder.Default
   @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
   private Set<Wishlist> wishlists = new HashSet<>();
-   */
 }
