@@ -1,4 +1,4 @@
-package com.bookstore.bookstoreapi.data.controller;
+/*package com.bookstore.bookstoreapi.data.controller;
 
 import com.bookstore.bookstoreapi.data.entity.Book;
 import com.bookstore.bookstoreapi.data.entity.Wishlist;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class WishlistController {
 
-  @Autowired private WishlistService wishlistService;
+  //@Autowired private WishlistService wishlistService;
 
   @PostMapping("/wishlist")
   public ResponseEntity<Void> createWishlist(
@@ -70,3 +70,4 @@ public class WishlistController {
     return ResponseEntity.ok(new ArrayList<>(wishlist.getBooks()));
   }
 }
+ */
