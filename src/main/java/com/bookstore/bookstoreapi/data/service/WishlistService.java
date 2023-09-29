@@ -1,4 +1,4 @@
-package com.bookstore.bookstoreapi.data.service;
+/*package com.bookstore.bookstoreapi.data.service;
 
 import com.bookstore.bookstoreapi.data.entity.Book;
 import com.bookstore.bookstoreapi.data.entity.Customer;
@@ -96,3 +96,4 @@ public class WishlistService {
     return wishlistRepository.findById(wishlistId);
   }
 }
+ */
