@@ -1,5 +1,6 @@
 package com.bookstore.bookstoreapi.data.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,6 +15,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Table(name = "Customer")
@@ -41,7 +43,7 @@ public class Customer {
   private String address;
 
   @EqualsAndHashCode.Exclude
-  @OneToMany(mappedBy = "customer")
+  @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
   @Builder.Default
   private Set<Rating> ratings = new HashSet<>();
 

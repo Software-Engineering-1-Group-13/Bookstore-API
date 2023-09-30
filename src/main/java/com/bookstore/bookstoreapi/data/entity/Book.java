@@ -1,10 +1,16 @@
 package com.bookstore.bookstoreapi.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
@@ -17,6 +23,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Table(name = "Book")
@@ -48,8 +55,12 @@ public class Book {
   @Column(name = "StockCount", nullable = false)
   private Integer stockCount;
 
-  @OneToMany @Builder.Default private Set<Rating> ratings = new HashSet<>();
+  @ToString.Exclude
+  @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+  @Builder.Default
+  private Set<Rating> ratings = new HashSet<>();
 
+  @JsonIgnore
   @ToString.Exclude
   @Builder.Default
   @ManyToMany

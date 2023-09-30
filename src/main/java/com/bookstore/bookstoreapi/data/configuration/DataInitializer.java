@@ -71,24 +71,25 @@ public class DataInitializer {
 
       johnWishList.getBooks().add(book1);
       book1.getWishlists().add(johnWishList);
-      wishlistRepository.save(johnWishList);
-      bookRepository.save(book1);
 
       johnWishList.getBooks().add(book2);
       book2.getWishlists().add(johnWishList);
+
       wishlistRepository.save(johnWishList);
-      bookRepository.save(book2);
 
       Rating rating1 = new Rating();
       rating1.setCustomer(john);
       rating1.setBook(book1);
       rating1.setRating(4);
+
       ratingRepository.save(rating1);
+
       john.getRatings().add(rating1);
-      ratingRepository.save(rating1);
-      customerRepository.save(john);
       book1.getRatings().add(rating1);
+
+      customerRepository.save(john);
       bookRepository.save(book1);
+      bookRepository.save(book2);
     };
   }
 }
