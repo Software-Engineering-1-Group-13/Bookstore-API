@@ -18,9 +18,9 @@ public class DataInitializer {
 
   @Bean
   public CommandLineRunner initData(
-      CustomerRepository customerRepository,
-      WishlistRepository wishlistRepository,
-      BookRepository bookRepository) {
+          CustomerRepository customerRepository,
+          WishlistRepository wishlistRepository,
+          BookRepository bookRepository) {
     return args -> {
       Customer john = new Customer();
       john.setFirstName("John");
@@ -42,39 +42,14 @@ public class DataInitializer {
       wishlistRepository.save(johnWishList);
 
       Book book1 = new Book();
-      book1.setTitle("A Journey to the Center of the Earth");
       book1.setIsbn("978-1503215153");
-      book1.setPublishingDate(DATE_FORMAT.parse("1864-01-01"));
+      book1.setTitle("A Journey to the Center of the Earth");
+      book1.setAuthor("Jules Verne");
+      book1.setGenre("Science Fiction");
+      book1.setDescription(
+              "A geology professor and his nephew discover and decode an ancient document that"
+                      + " shows that a dormant volcano holds a secret entrance to a subterranean world at the earth's center.");
+      book1.setPublisher("Simon & Shuster");
+      book1.setPublishingDate(DATE_FORMAT.parse("1864-11-25"));
       book1.setPrice(12.99);
       book1.setStockCount(50);
-
-      Book book2 = new Book();
-      book2.setTitle("The Time Machine");
-      book2.setIsbn("978-0451530707");
-      book2.setPublishingDate(DATE_FORMAT.parse("1895-05-07"));
-      book2.setPrice(10.50);
-      book2.setStockCount(30);
-
-      Book book3 = new Book();
-      book3.setTitle("Brave New World");
-      book3.setIsbn("978-0060850524");
-      book3.setPublishingDate(DATE_FORMAT.parse("1932-08-15"));
-      book3.setPrice(15.20);
-      book3.setStockCount(20);
-
-      bookRepository.save(book1);
-      bookRepository.save(book2);
-      bookRepository.save(book3);
-
-      johnWishList.getBooks().add(book1);
-      book1.getWishlists().add(johnWishList);
-      wishlistRepository.save(johnWishList);
-      bookRepository.save(book1);
-
-      johnWishList.getBooks().add(book2);
-      book2.getWishlists().add(johnWishList);
-      wishlistRepository.save(johnWishList);
-      bookRepository.save(book2);
-    };
-  }
-}
