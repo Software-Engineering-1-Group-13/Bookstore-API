@@ -35,10 +35,10 @@ public class Customer {
   @Column(name = "LastName", nullable = false)
   private String lastName;
 
-  @Column(name = "Email", nullable = false, unique = true)
+  @Column(name = "Email Address", nullable = false, unique = true)
   private String email;
 
-  @Column(name = "Address", nullable = false)
+  @Column(name = "Home Address", nullable = false)
   private String address;
 
   @ToString.Exclude
