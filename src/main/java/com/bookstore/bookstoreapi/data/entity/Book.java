@@ -71,9 +71,9 @@ public class Book {
   @Builder.Default
   @ManyToMany
   @JoinTable(
-          name = "WishlistBook",
-          joinColumns = @JoinColumn(name = "BookID"),
-          inverseJoinColumns = @JoinColumn(name = "WishlistID"))
+      name = "WishlistBook",
+      joinColumns = @JoinColumn(name = "BookID"),
+      inverseJoinColumns = @JoinColumn(name = "WishlistID"))
   @JsonManagedReference
   private Set<Wishlist> wishlists = new HashSet<>();
 }
