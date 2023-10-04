@@ -80,7 +80,7 @@ public class DataInitializer {
       Rating rating1 = new Rating();
       rating1.setCustomer(john);
       rating1.setBook(book1);
-      rating1.setRating(4);
+      rating1.setRating(3);
 
       ratingRepository.save(rating1);
 
