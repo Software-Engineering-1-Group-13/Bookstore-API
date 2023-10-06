@@ -26,27 +26,11 @@ public class CustomerService {
         return customerRepository.findById(customerId);
     }
 
-    public Customer createCustomer(Customer customer) {
+    public Customer createOrUpdateCustomer(Customer customer) {
         return customerRepository.save(customer);
     }
 
-    public Customer updateCustomer(Long customerId, Customer updatedCustomer) {
-        Optional<Customer> existingCustomer = customerRepository.findById(customerId);
-        if (existingCustomer.isPresent()) {
-            Customer customerToUpdate = existingCustomer.get();
-            // Update the customer fields as needed
-            customerToUpdate.setFirstName(updatedCustomer.getFirstName());
-            customerToUpdate.setLastName(updatedCustomer.getLastName());
-            customerToUpdate.setEmail(updatedCustomer.getEmail());
-            customerToUpdate.setAddress(updatedCustomer.getAddress());
-            return customerRepository.save(customerToUpdate);
-        } else {
-            // Customer not found
-            return null;
-        }
-    }
-
-    public void deleteCustomer(Long customerId) {
+    public void deleteCustomerById(Long customerId) {
         customerRepository.deleteById(customerId);
     }
 }
