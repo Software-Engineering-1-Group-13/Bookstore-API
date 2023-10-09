@@ -13,6 +13,7 @@ import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -40,6 +41,11 @@ public class Customer {
 
   @Column(name = "Address", nullable = false)
   private String address;
+
+  @EqualsAndHashCode.Exclude
+  @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+  @Builder.Default
+  private Set<Rating> ratings = new HashSet<>();
 
   @ToString.Exclude
   @Builder.Default
