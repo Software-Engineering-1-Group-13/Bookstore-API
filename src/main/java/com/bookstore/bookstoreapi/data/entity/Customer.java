@@ -45,6 +45,11 @@ public class Customer {
   @EqualsAndHashCode.Exclude
   @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
   @Builder.Default
+  private Set<Comment> comments = new HashSet<>();
+
+  @EqualsAndHashCode.Exclude
+  @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+  @Builder.Default
   private Set<Rating> ratings = new HashSet<>();
 
   @ToString.Exclude
