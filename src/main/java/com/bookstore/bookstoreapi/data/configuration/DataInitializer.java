@@ -2,9 +2,11 @@ package com.bookstore.bookstoreapi.data.configuration;
 
 import com.bookstore.bookstoreapi.data.entity.Book;
 import com.bookstore.bookstoreapi.data.entity.Customer;
+import com.bookstore.bookstoreapi.data.entity.Rating;
 import com.bookstore.bookstoreapi.data.entity.Wishlist;
 import com.bookstore.bookstoreapi.data.repository.BookRepository;
 import com.bookstore.bookstoreapi.data.repository.CustomerRepository;
+import com.bookstore.bookstoreapi.data.repository.RatingRepository;
 import com.bookstore.bookstoreapi.data.repository.WishlistRepository;
 import java.text.SimpleDateFormat;
 import org.springframework.boot.CommandLineRunner;
@@ -20,7 +22,8 @@ public class DataInitializer {
   public CommandLineRunner initData(
       CustomerRepository customerRepository,
       WishlistRepository wishlistRepository,
-      BookRepository bookRepository) {
+      BookRepository bookRepository,
+      RatingRepository ratingRepository) {
     return args -> {
       Customer john = new Customer();
       john.setFirstName("John");
@@ -131,12 +134,24 @@ public class DataInitializer {
 
       johnWishList.getBooks().add(book1);
       book1.getWishlists().add(johnWishList);
-      wishlistRepository.save(johnWishList);
-      bookRepository.save(book1);
 
       johnWishList.getBooks().add(book2);
       book2.getWishlists().add(johnWishList);
+
       wishlistRepository.save(johnWishList);
+
+      Rating rating1 = new Rating();
+      rating1.setCustomer(john);
+      rating1.setBook(book1);
+      rating1.setRating(3);
+
+      ratingRepository.save(rating1);
+
+      john.getRatings().add(rating1);
+      book1.getRatings().add(rating1);
+
+      customerRepository.save(john);
+      bookRepository.save(book1);
       bookRepository.save(book2);
     };
   }

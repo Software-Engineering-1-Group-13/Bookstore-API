@@ -1,6 +1,7 @@
 package com.bookstore.bookstoreapi.data.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,6 +35,7 @@ public class Wishlist {
   @Column(name = "WishlistName", nullable = false, unique = true)
   private String name;
 
+  @JsonIgnore
   @ManyToOne
   @JoinColumn(name = "UserID", insertable = false, updatable = false)
   private Customer customer;
