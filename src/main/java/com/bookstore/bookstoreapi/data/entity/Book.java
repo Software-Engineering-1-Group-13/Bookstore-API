@@ -39,11 +39,23 @@ public class Book {
   @Column(name = "BookID")
   private Long id;
 
+  @Column(name = "ISBN", nullable = false, unique = true)
+  private String isbn;
+
   @Column(name = "Title", nullable = false)
   private String title;
 
-  @Column(name = "ISBN", nullable = false, unique = true)
-  private String isbn;
+  @Column(name = "Author", nullable = false)
+  private String author;
+
+  @Column(name = "Genre", nullable = false)
+  private String genre;
+
+  @Column(name = "Description", nullable = false)
+  private String description;
+
+  @Column(name = "Publisher", nullable = false)
+  private String publisher;
 
   @Temporal(TemporalType.DATE)
   @Column(name = "PublicationDate", nullable = false)
@@ -54,6 +66,9 @@ public class Book {
 
   @Column(name = "StockCount", nullable = false)
   private Integer stockCount;
+
+  @Column(name = "CopiesSold", nullable = false)
+  private Integer copiesSold;
 
   @ToString.Exclude
   @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
