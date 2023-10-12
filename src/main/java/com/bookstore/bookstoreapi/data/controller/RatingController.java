@@ -28,7 +28,7 @@ public class RatingController {
     return new ResponseEntity<>(HttpStatus.CREATED);
   }
 
-  @PostMapping("/comment/book")
+  @PostMapping("/comments/book")
   public ResponseEntity<Void> createComment(
       @RequestParam String comment, @RequestParam Long userID, @RequestParam Long bookID) {
 

@@ -33,10 +33,13 @@ public class RatingService {
     Book book = bookOptional.get();
 
     Rating newRating = new Rating();
+
     newRating.setCustomer(customer);
     newRating.setBook(book);
     newRating.setRating(rating);
+
     ratingRepository.save(newRating);
+
     customer.getRatings().add(newRating);
     customerRepository.save(customer);
 
@@ -56,10 +59,13 @@ public class RatingService {
     Book book = bookOptional.get();
 
     Comment newComment = new Comment();
+
     newComment.setCustomer(customer);
     newComment.setBook(book);
     newComment.setComment(comment);
+
     commentRepository.save(newComment);
+
     customer.getComments().add(newComment);
     customerRepository.save(customer);
 
