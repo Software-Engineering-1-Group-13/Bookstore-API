@@ -1,9 +1,11 @@
 package com.bookstore.bookstoreapi.data.service;
 
 import com.bookstore.bookstoreapi.data.entity.Book;
+import com.bookstore.bookstoreapi.data.entity.Comment;
 import com.bookstore.bookstoreapi.data.entity.Customer;
 import com.bookstore.bookstoreapi.data.entity.Rating;
 import com.bookstore.bookstoreapi.data.repository.BookRepository;
+import com.bookstore.bookstoreapi.data.repository.CommentRepository;
 import com.bookstore.bookstoreapi.data.repository.CustomerRepository;
 import com.bookstore.bookstoreapi.data.repository.RatingRepository;
 import java.util.Optional;
@@ -16,6 +18,7 @@ public class RatingService {
   @Autowired private RatingRepository ratingRepository;
   @Autowired private CustomerRepository customerRepository;
   @Autowired private BookRepository bookRepository;
+  @Autowired private CommentRepository commentRepository;
 
   public Optional<Rating> createRating(Integer rating, Long userID, Long bookID) {
 
@@ -30,13 +33,42 @@ public class RatingService {
     Book book = bookOptional.get();
 
     Rating newRating = new Rating();
+
     newRating.setCustomer(customer);
     newRating.setBook(book);
     newRating.setRating(rating);
+
     ratingRepository.save(newRating);
+
     customer.getRatings().add(newRating);
     customerRepository.save(customer);
 
     return Optional.of(newRating);
+  }
+
+  public Optional<Comment> createComment(String comment, Long userID, Long bookID) {
+
+    Optional<Customer> userOptional = customerRepository.findById(userID);
+    Optional<Book> bookOptional = bookRepository.findById(bookID);
+
+    if (userOptional.isEmpty() || bookOptional.isEmpty()) {
+      return Optional.empty();
+    }
+
+    Customer customer = userOptional.get();
+    Book book = bookOptional.get();
+
+    Comment newComment = new Comment();
+
+    newComment.setCustomer(customer);
+    newComment.setBook(book);
+    newComment.setComment(comment);
+
+    commentRepository.save(newComment);
+
+    customer.getComments().add(newComment);
+    customerRepository.save(customer);
+
+    return Optional.of(newComment);
   }
 }
