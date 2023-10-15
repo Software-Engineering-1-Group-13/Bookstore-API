@@ -1,10 +1,12 @@
 package com.bookstore.bookstoreapi.data.configuration;
 
 import com.bookstore.bookstoreapi.data.entity.Book;
+import com.bookstore.bookstoreapi.data.entity.Comment;
 import com.bookstore.bookstoreapi.data.entity.Customer;
 import com.bookstore.bookstoreapi.data.entity.Rating;
 import com.bookstore.bookstoreapi.data.entity.Wishlist;
 import com.bookstore.bookstoreapi.data.repository.BookRepository;
+import com.bookstore.bookstoreapi.data.repository.CommentRepository;
 import com.bookstore.bookstoreapi.data.repository.CustomerRepository;
 import com.bookstore.bookstoreapi.data.repository.RatingRepository;
 import com.bookstore.bookstoreapi.data.repository.WishlistRepository;
@@ -23,6 +25,7 @@ public class DataInitializer {
       CustomerRepository customerRepository,
       WishlistRepository wishlistRepository,
       BookRepository bookRepository,
+      CommentRepository commentRepository,
       RatingRepository ratingRepository) {
     return args -> {
       Customer john = new Customer();
@@ -82,10 +85,18 @@ public class DataInitializer {
       rating1.setBook(book1);
       rating1.setRating(3);
 
+      Comment comment1 = new Comment();
+      comment1.setCustomer(john);
+      comment1.setBook(book1);
+      comment1.setComment("Wow! Super awesome book!");
+
       ratingRepository.save(rating1);
+      commentRepository.save(comment1);
 
       john.getRatings().add(rating1);
       book1.getRatings().add(rating1);
+      john.getComments().add(comment1);
+      book1.getComments().add(comment1);
 
       customerRepository.save(john);
       bookRepository.save(book1);
