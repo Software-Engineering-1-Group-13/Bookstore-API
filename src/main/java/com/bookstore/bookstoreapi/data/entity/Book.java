@@ -24,6 +24,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Entity
 @Table(name = "Book")
@@ -32,18 +34,30 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ResponseStatus(HttpStatus.CREATED)
 public class Book {
-
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "BookID")
   private Long id;
 
+  @Column(name = "ISBN", nullable = false, unique = true)
+  private String isbn;
+
   @Column(name = "Title", nullable = false)
   private String title;
 
-  @Column(name = "ISBN", nullable = false, unique = true)
-  private String isbn;
+  @Column(name = "Author", nullable = false)
+  private String author;
+
+  @Column(name = "Genre", nullable = false)
+  private String genre;
+
+  @Column(name = "Description", nullable = false)
+  private String description;
+
+  @Column(name = "Publisher", nullable = false)
+  private String publisher;
 
   @Temporal(TemporalType.DATE)
   @Column(name = "PublicationDate", nullable = false)
@@ -55,10 +69,8 @@ public class Book {
   @Column(name = "StockCount", nullable = false)
   private Integer stockCount;
 
-  @ToString.Exclude
-  @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
-  @Builder.Default
-  private Set<Comment> comments = new HashSet<>();
+  @Column(name = "CopiesSold", nullable = false)
+  private Integer copiesSold;
 
   @ToString.Exclude
   @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
