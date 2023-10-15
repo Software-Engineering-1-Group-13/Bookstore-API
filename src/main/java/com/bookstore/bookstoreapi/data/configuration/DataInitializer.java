@@ -165,10 +165,7 @@ public class DataInitializer {
       johnWishList.getBooks().add(book2);
       book2.getWishlists().add(johnWishList);
       wishlistRepository.save(johnWishList);
-      Rating rating1 = new Rating();
-      rating1.setCustomer(john);
-      rating1.setBook(book1);
-      rating1.setRating(3);
+
       ratingRepository.save(rating1);
       john.getRatings().add(rating1);
       book1.getRatings().add(rating1);
