@@ -139,7 +139,6 @@ public class DataInitializer {
       johnWishList.getBooks().add(book1);
       book1.getWishlists().add(johnWishList);
 
-
       johnWishList.getBooks().add(book2);
       book2.getWishlists().add(johnWishList);
 
