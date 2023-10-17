@@ -18,14 +18,13 @@ import jakarta.persistence.TemporalType;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import javax.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Entity
 @Table(name = "Book")
@@ -34,7 +33,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ResponseStatus(HttpStatus.CREATED)
 public class Book {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -70,7 +68,9 @@ public class Book {
   private Integer stockCount;
 
   @Column(name = "CopiesSold", nullable = false)
-  private Integer copiesSold;
+  @Builder.Default
+  @Min(value = 0, message = "CopiesSold should not be less than 0")
+  private Integer copiesSold = 0;
 
   @ToString.Exclude
   @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
