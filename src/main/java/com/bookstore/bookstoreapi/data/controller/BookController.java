@@ -15,7 +15,7 @@ public class BookController {
 
   @Autowired private BookService bookService;
 
-  @PostMapping("/books")
+  @PostMapping("/books/create")
   public ResponseEntity<Book> createABook(@RequestBody Book book) {
     Optional<Book> createdBook = bookService.createABook(book);
     if (createdBook.isEmpty()) {
