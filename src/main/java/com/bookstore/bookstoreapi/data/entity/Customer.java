@@ -1,7 +1,6 @@
 package com.bookstore.bookstoreapi.data.entity;
 
 import jakarta.persistence.*;
-
 import java.util.HashSet;
 import java.util.Set;
 import lombok.AllArgsConstructor;
