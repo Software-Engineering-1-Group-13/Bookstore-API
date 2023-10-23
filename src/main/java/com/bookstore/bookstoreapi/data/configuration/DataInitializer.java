@@ -29,15 +29,17 @@ public class DataInitializer {
       RatingRepository ratingRepository) {
     return args -> {
       Customer john = new Customer();
-      john.setFirstName("John");
-      john.setLastName("Doe");
+      john.setUsername("Johnny");
+      john.setPassword("JohhnyBoy123");
+      john.setName("John Doe");
       john.setEmail("john.doe@example.com");
       john.setAddress("12345 Random st");
       customerRepository.save(john);
 
       Customer jane = new Customer();
-      jane.setFirstName("Jane");
-      jane.setLastName("Smith");
+      jane.setUsername("MaryJane");
+      jane.setPassword("MJ123");
+      jane.setName("Jane Smith");
       jane.setEmail("jane.smith@example.com");
       jane.setAddress("12345 non-Random st");
       customerRepository.save(jane);
@@ -99,7 +101,7 @@ public class DataInitializer {
       book1.getComments().add(comment1);
 
       customerRepository.save(john);
-      
+
       bookRepository.save(book1);
       bookRepository.save(book2);
     };

@@ -43,6 +43,6 @@ public class Comment {
 
   @JsonIgnore
   @ManyToOne
-  @JoinColumn(name = "UserID")
+  @JoinColumn(name = "CustomerID")
   private Customer customer;
 }
