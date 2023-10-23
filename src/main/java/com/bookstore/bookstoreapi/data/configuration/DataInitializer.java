@@ -99,6 +99,7 @@ public class DataInitializer {
       book1.getComments().add(comment1);
 
       customerRepository.save(john);
+      
       bookRepository.save(book1);
       bookRepository.save(book2);
     };
