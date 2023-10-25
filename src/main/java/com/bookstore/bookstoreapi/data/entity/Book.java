@@ -15,6 +15,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.Min;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -33,17 +34,28 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 public class Book {
-
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "BookID")
   private Long id;
 
+  @Column(name = "ISBN", nullable = false, unique = true)
+  private String isbn;
+
   @Column(name = "Title", nullable = false)
   private String title;
 
-  @Column(name = "ISBN", nullable = false, unique = true)
-  private String isbn;
+  @Column(name = "Author", nullable = false)
+  private String author;
+
+  @Column(name = "Genre", nullable = false)
+  private String genre;
+
+  @Column(name = "Description", nullable = false)
+  private String description;
+
+  @Column(name = "Publisher", nullable = false)
+  private String publisher;
 
   @Temporal(TemporalType.DATE)
   @Column(name = "PublicationDate", nullable = false)
@@ -54,6 +66,11 @@ public class Book {
 
   @Column(name = "StockCount", nullable = false)
   private Integer stockCount;
+
+  @Column(name = "CopiesSold", nullable = false)
+  @Builder.Default
+  @Min(value = 0, message = "CopiesSold should not be less than 0")
+  private Integer copiesSold = 0;
 
   @ToString.Exclude
   @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
