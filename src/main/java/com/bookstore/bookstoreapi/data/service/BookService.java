@@ -15,4 +15,8 @@ public class BookService {
     Book creadtedBook = bookRepository.save(book);
     return Optional.of(creadtedBook);
   }
+
+  public Book getBookByISBN(String isbn) {
+    return bookRepository.findByIsbn(isbn);
+  }
 }

@@ -6,8 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -22,5 +24,16 @@ public class BookController {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     return new ResponseEntity<>(createdBook.get(), HttpStatus.CREATED);
+  }
+
+  @GetMapping("/books/findbyisbn")
+  public ResponseEntity<Book> getBookByISBN(@RequestParam String isbn) {
+    Book book = bookService.getBookByISBN(isbn);
+
+    if (book != null) {
+      return new ResponseEntity<>(book, HttpStatus.OK);
+    } else {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
   }
 }
