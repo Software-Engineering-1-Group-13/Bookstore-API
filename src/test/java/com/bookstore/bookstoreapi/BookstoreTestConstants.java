@@ -4,7 +4,7 @@ import java.time.format.DateTimeFormatter;
 
 public final class BookstoreTestConstants {
 
-    private BookstoreTestConstants() {}
+  private BookstoreTestConstants() {}
 
-    public static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+  public static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 }

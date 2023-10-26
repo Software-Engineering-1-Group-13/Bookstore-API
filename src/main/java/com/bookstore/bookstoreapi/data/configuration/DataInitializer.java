@@ -13,23 +13,22 @@ import com.bookstore.bookstoreapi.data.repository.CommentRepository;
 import com.bookstore.bookstoreapi.data.repository.CustomerRepository;
 import com.bookstore.bookstoreapi.data.repository.RatingRepository;
 import com.bookstore.bookstoreapi.data.repository.WishlistRepository;
+import java.time.LocalDate;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.time.LocalDate;
 
 @Configuration
 public class DataInitializer {
 
   @Bean
   public CommandLineRunner initData(
-          CustomerRepository customerRepository,
-          WishlistRepository wishlistRepository,
-          BookRepository bookRepository,
-          CommentRepository commentRepository,
-          RatingRepository ratingRepository,
-          CartRepository cartRepository) {
+      CustomerRepository customerRepository,
+      WishlistRepository wishlistRepository,
+      BookRepository bookRepository,
+      CommentRepository commentRepository,
+      RatingRepository ratingRepository,
+      CartRepository cartRepository) {
     return args -> {
       Customer john = new Customer();
       john.setFirstName("John");
@@ -51,7 +50,7 @@ public class DataInitializer {
       Book book1 = new Book();
       book1.setTitle("A Journey to the Center of the Earth");
       book1.setIsbn("978-1503215153");
-      book1.setPublishingDate(LocalDate.parse(("1864-01-01") ,BookstoreConstants.DATE_FORMAT));
+      book1.setPublishingDate(LocalDate.parse(("1864-01-01"), BookstoreConstants.DATE_FORMAT));
       book1.setTitle("A Journey to the Center of the Earth");
       book1.setAuthor("Jules Verne");
       book1.setGenre(BookstoreConstants.SCIENCE_FICTION);
@@ -59,7 +58,7 @@ public class DataInitializer {
           "A geology professor and his nephew discover and decode an ancient document that"
               + " shows that a dormant volcano holds a secret entrance to a subterranean world at the earth's center.");
       book1.setPublisher("Simon & Shuster");
-      book1.setPublishingDate(LocalDate.parse(("1864-11-25") ,BookstoreConstants.DATE_FORMAT));
+      book1.setPublishingDate(LocalDate.parse(("1864-11-25"), BookstoreConstants.DATE_FORMAT));
       book1.setPrice(12.99);
       book1.setStockCount(50);
       book1.setCopiesSold(1000000);
@@ -73,7 +72,7 @@ public class DataInitializer {
       book2.setDescription(
           "A nameless scientist builds a time machine, travels to the year 802,701 AD and there encounters humanity’s descendants ");
       book2.setPublisher("William Heinemann (UK) Henry Holt (US)");
-      book2.setPublishingDate(LocalDate.parse(("1895-05-07") ,BookstoreConstants.DATE_FORMAT));
+      book2.setPublishingDate(LocalDate.parse(("1895-05-07"), BookstoreConstants.DATE_FORMAT));
       book2.setPrice(10.50);
       book2.setStockCount(30);
       book2.setCopiesSold(1000000);
@@ -87,7 +86,7 @@ public class DataInitializer {
       book3.setDescription(
           "A futuristic society, called the World State, that revolves around science and efficiency.");
       book3.setPublisher("HarperCollins");
-      book3.setPublishingDate(LocalDate.parse(("1932-08-15") ,BookstoreConstants.DATE_FORMAT));
+      book3.setPublishingDate(LocalDate.parse(("1932-08-15"), BookstoreConstants.DATE_FORMAT));
       book3.setPrice(15.20);
       book3.setStockCount(20);
       book3.setCopiesSold(1000000);
@@ -102,7 +101,7 @@ public class DataInitializer {
               + "Jeremy Crawford, husband of bestselling author Verity Crawford, has hired "
               + "Lowen to complete the remaining books in a successful series his injured wife is unable to finish.");
       book4.setPublisher("Grand Central Publishing");
-      book4.setPublishingDate(LocalDate.parse(("2018-12-07") ,BookstoreConstants.DATE_FORMAT));
+      book4.setPublishingDate(LocalDate.parse(("2018-12-07"), BookstoreConstants.DATE_FORMAT));
       book4.setPrice(12.81);
       book4.setStockCount(15);
       book4.setCopiesSold(3000000);
@@ -115,7 +114,7 @@ public class DataInitializer {
       book5.setDescription(
           "A timeless tale of forbidden romance, ill-advised attraction, and a wife who just won't stay buried");
       book5.setPublisher("St. Martin's Press");
-      book5.setPublishingDate(LocalDate.parse(("2021-01-05") ,BookstoreConstants.DATE_FORMAT));
+      book5.setPublishingDate(LocalDate.parse(("2021-01-05"), BookstoreConstants.DATE_FORMAT));
       book5.setPrice(9.99);
       book5.setStockCount(11);
       book5.setCopiesSold(235169);
@@ -128,7 +127,7 @@ public class DataInitializer {
       book6.setDescription(
           "A woman who raised herself in the marshes of the Deep South becomes a suspect in the murder of a man with whom she was once involved.");
       book6.setPublisher("St. Martin's Press");
-      book6.setPublishingDate(LocalDate.parse(("2018-08-14") ,BookstoreConstants.DATE_FORMAT));
+      book6.setPublishingDate(LocalDate.parse(("2018-08-14"), BookstoreConstants.DATE_FORMAT));
       book6.setPrice(14.67);
       book6.setStockCount(21);
       book6.setCopiesSold(12000000);
