@@ -19,6 +19,8 @@ import jakarta.validation.constraints.Min;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -75,7 +77,7 @@ public class Book {
   @ToString.Exclude
   @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
   @Builder.Default
-  private Set<Comment> comments = new HashSet<>();
+  private List<Comment> comments = new ArrayList<>();
 
   @ToString.Exclude
   @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
