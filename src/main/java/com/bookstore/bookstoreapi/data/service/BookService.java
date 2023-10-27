@@ -16,7 +16,7 @@ public class BookService {
     return Optional.of(creadtedBook);
   }
 
-  public Book getBookByISBN(String isbn) {
-    return bookRepository.findByIsbn(isbn);
+  public Book findByISBN(String ISBN) {
+    return bookRepository.findByIsbn(ISBN);
   }
 }
