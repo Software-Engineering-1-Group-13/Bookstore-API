@@ -16,10 +16,8 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.Min;
-import java.util.ArrayList;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -61,7 +59,7 @@ public class Book {
 
   @Temporal(TemporalType.DATE)
   @Column(name = "PublicationDate", nullable = false)
-  private Date publishingDate;
+  private LocalDate publishingDate;
 
   @Column(name = "Price", nullable = false)
   private Double price;
@@ -77,7 +75,7 @@ public class Book {
   @ToString.Exclude
   @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
   @Builder.Default
-  private List<Comment> comments = new ArrayList<>();
+  private Set<Comment> comments = new HashSet<>();
 
   @ToString.Exclude
   @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
@@ -94,4 +92,10 @@ public class Book {
       inverseJoinColumns = @JoinColumn(name = "WishlistID"))
   @JsonManagedReference
   private Set<Wishlist> wishlists = new HashSet<>();
+
+  @JsonIgnore
+  @ToString.Exclude
+  @Builder.Default
+  @ManyToMany(mappedBy = "books")
+  private Set<Cart> carts = new HashSet<>();
 }

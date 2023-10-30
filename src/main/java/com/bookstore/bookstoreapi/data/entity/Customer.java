@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.util.HashSet;
 import java.util.Set;
@@ -56,4 +57,8 @@ public class Customer {
   @Builder.Default
   @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
   private Set<Wishlist> wishlists = new HashSet<>();
+
+  @EqualsAndHashCode.Exclude
+  @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL)
+  private Cart cart;
 }

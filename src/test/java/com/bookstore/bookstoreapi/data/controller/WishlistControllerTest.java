@@ -46,7 +46,7 @@ class WishlistControllerTest {
 
     mockMvc
         .perform(
-            post("/wishlist")
+            post("/wishlist/create")
                 .param("wishlistName", "wishlist")
                 .param("userID", "1")
                 .contentType(MediaType.APPLICATION_JSON))
