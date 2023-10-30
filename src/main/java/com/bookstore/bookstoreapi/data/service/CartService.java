@@ -45,4 +45,29 @@ public class CartService {
     Optional<Customer> customerOptional = customerRepository.findById(userID);
     return customerOptional.map(Customer::getCart);
   }
+
+  public Optional<Cart> removeBookFromCart(Long bookID, Long userID) {
+
+    Optional<Book> bookOptional = bookRepository.findById(bookID);
+    Optional<Customer> customerOptional = customerRepository.findById(userID);
+
+    if (bookOptional.isEmpty() || customerOptional.isEmpty()) {
+      return Optional.empty();
+    }
+
+    Book book = bookOptional.get();
+    Cart cart = customerOptional.get().getCart();
+
+    if (cart.getBooks().contains(book)) {
+      cart.getBooks().remove(book);
+      book.getCarts().remove(cart);
+
+      cartRepository.save(cart);
+      bookRepository.save(book);
+
+      return Optional.of(cart);
+    }
+
+    return Optional.empty();
+  }
 }

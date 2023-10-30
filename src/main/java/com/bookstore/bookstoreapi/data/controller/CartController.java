@@ -9,6 +9,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -52,5 +53,17 @@ public class CartController {
         .<ResponseEntity<List<Book>>>map(
             cart -> ResponseEntity.ok(new ArrayList<>(cart.getBooks())))
         .orElseGet(() -> ResponseEntity.notFound().build());
+  }
+
+  @DeleteMapping("/deleteBook")
+  public ResponseEntity<Void> removeBookFromCart(
+      @RequestParam Long bookID, @RequestParam Long userID) {
+
+    Optional<Cart> removeBookFromCart = cartService.removeBookFromCart(bookID, userID);
+    if (removeBookFromCart.isEmpty()) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    return new ResponseEntity<>(HttpStatus.OK);
   }
 }
