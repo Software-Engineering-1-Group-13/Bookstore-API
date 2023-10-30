@@ -36,12 +36,14 @@ public class DataInitializer {
       john.setEmail("john.doe@example.com");
       john.setAddress("12345 Random st");
       customerRepository.save(john);
+
       Customer jane = new Customer();
       jane.setFirstName("Jane");
       jane.setLastName("Smith");
       jane.setEmail("jane.smith@example.com");
       jane.setAddress("12345 non-Random st");
       customerRepository.save(jane);
+
       Wishlist johnWishList = new Wishlist();
       johnWishList.setName("John's Favorites");
       johnWishList.setCustomer(john);
@@ -144,7 +146,12 @@ public class DataInitializer {
       johnCart.getBooks().add(book1);
       johnCart.getBooks().add(book2);
       johnCart.getBooks().add(book3);
+
+      Cart janeCart = new Cart();
+      janeCart.setCustomer(jane);
+
       cartRepository.save(johnCart);
+      cartRepository.save(janeCart);
 
       book1.getCarts().add(johnCart);
       book2.getCarts().add(johnCart);
