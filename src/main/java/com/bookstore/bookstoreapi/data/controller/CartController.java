@@ -1,7 +1,10 @@
 package com.bookstore.bookstoreapi.data.controller;
 
+import com.bookstore.bookstoreapi.data.entity.Book;
 import com.bookstore.bookstoreapi.data.entity.Cart;
 import com.bookstore.bookstoreapi.data.service.CartService;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,6 +26,7 @@ public class CartController {
   public ResponseEntity<Double> getCartSubtotal(@PathVariable Long cartID) {
 
     Optional<Double> getCartSubtotal = cartService.getCartSubtotal(cartID);
+
     return getCartSubtotal
         .map(ResponseEntity::ok)
         .orElseGet(() -> ResponseEntity.notFound().build());
@@ -37,5 +41,16 @@ public class CartController {
     }
 
     return new ResponseEntity<>(HttpStatus.OK);
+  }
+
+  @GetMapping("/{userID}/listBooks")
+  public ResponseEntity<List<Book>> listBooksInCart(@PathVariable Long userID) {
+
+    Optional<Cart> listBooksInCart = cartService.listBooksInCart(userID);
+
+    return listBooksInCart
+        .<ResponseEntity<List<Book>>>map(
+            cart -> ResponseEntity.ok(new ArrayList<>(cart.getBooks())))
+        .orElseGet(() -> ResponseEntity.notFound().build());
   }
 }
