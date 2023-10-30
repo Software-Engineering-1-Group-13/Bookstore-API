@@ -21,20 +21,24 @@ public class BookController {
 
   @PostMapping("/create")
   public ResponseEntity<Book> createABook(@RequestBody Book book) {
+
     Optional<Book> createdBook = bookService.createABook(book);
     if (createdBook.isEmpty()) {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
     return new ResponseEntity<>(createdBook.get(), HttpStatus.CREATED);
   }
 
   @GetMapping("/{ISBN}")
   public ResponseEntity<Book> findByISBN(@PathVariable String ISBN) {
+
     Book book = bookService.findByISBN(ISBN);
 
     if (book != null) {
       return new ResponseEntity<>(book, HttpStatus.OK);
     }
+
     return new ResponseEntity<>(HttpStatus.NOT_FOUND);
   }
 }
