@@ -71,9 +71,4 @@ public class RatingService {
 
     return Optional.of(newComment);
   }
-
-  public Optional<Book> findBookId(Long bookId) {
-
-    return bookRepository.findById(bookId);
-  }
 }

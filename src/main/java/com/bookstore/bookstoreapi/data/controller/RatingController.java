@@ -1,17 +1,12 @@
 package com.bookstore.bookstoreapi.data.controller;
 
-import com.bookstore.bookstoreapi.data.entity.Book;
 import com.bookstore.bookstoreapi.data.entity.Comment;
 import com.bookstore.bookstoreapi.data.entity.Rating;
 import com.bookstore.bookstoreapi.data.service.RatingService;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,17 +38,5 @@ public class RatingController {
     }
 
     return new ResponseEntity<>(HttpStatus.CREATED);
-  }
-
-  @GetMapping("book/{bookID}/comments")
-  public ResponseEntity<List<Comment>> listCommentsFromBook(@PathVariable Long bookID) {
-
-    Optional<Book> findBook = ratingService.findBookId(bookID);
-    if (findBook.isEmpty()) {
-      return ResponseEntity.notFound().build();
-    }
-
-    Book book = findBook.get();
-    return ResponseEntity.ok(new ArrayList<>(book.getComments()));
   }
 }
