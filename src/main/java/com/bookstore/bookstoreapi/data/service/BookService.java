@@ -13,7 +13,9 @@ public class BookService {
   @Autowired private BookRepository bookRepository;
 
   public Optional<Book> createABook(Book book) {
+
     Book creadtedBook = bookRepository.save(book);
+
     return Optional.of(creadtedBook);
   }
 
@@ -24,5 +26,10 @@ public class BookService {
   public Optional<List<Book>> listBooksByGenre(String genre) {
 
     return bookRepository.findByGenre(genre);
+  }
+  
+  public Optional<Book> findBookId(Long bookId) {
+
+    return bookRepository.findById(bookId);
   }
 }
