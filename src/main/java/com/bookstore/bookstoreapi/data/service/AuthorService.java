@@ -12,7 +12,9 @@ public class AuthorService {
   @Autowired private AuthorRepository authorRepository;
 
   public Optional<Author> createAuthor(Author author) {
+
     Author createdAuthor = authorRepository.save(author);
+
     return Optional.of(createdAuthor);
   }
 }
