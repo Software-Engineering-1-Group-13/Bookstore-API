@@ -13,15 +13,17 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/wishlist")
 public class WishlistController {
 
   @Autowired private WishlistService wishlistService;
 
-  @PostMapping("/wishlist")
+  @PostMapping("/create")
   public ResponseEntity<Void> createWishlist(
       @RequestParam String wishlistName, @RequestParam Long userID) {
 
@@ -33,7 +35,7 @@ public class WishlistController {
     return new ResponseEntity<>(HttpStatus.CREATED);
   }
 
-  @PostMapping("/wishlist/book")
+  @PostMapping("/book")
   public ResponseEntity<Void> addBookToWishlist(
       @RequestParam Long bookID, @RequestParam Long wishlistID) {
 
@@ -45,7 +47,7 @@ public class WishlistController {
     return new ResponseEntity<>(HttpStatus.OK);
   }
 
-  @DeleteMapping("/wishlist/removeBook")
+  @DeleteMapping("/removeBook")
   public ResponseEntity<Void> removeBookFromWishlist(
       @RequestParam Long bookID, @RequestParam Long wishlistID) {
 
@@ -58,15 +60,13 @@ public class WishlistController {
     return new ResponseEntity<>(HttpStatus.OK);
   }
 
-  @GetMapping("wishlist/{wishlistID}/books")
+  @GetMapping("/{wishlistID}/books")
   public ResponseEntity<List<Book>> listBooksFromWishlist(@PathVariable Long wishlistID) {
 
     Optional<Wishlist> listedBooksFromWishlist = wishlistService.listBooksFromWishlist(wishlistID);
-    if (listedBooksFromWishlist.isEmpty()) {
-      return ResponseEntity.notFound().build();
-    }
-
-    Wishlist wishlist = listedBooksFromWishlist.get();
-    return ResponseEntity.ok(new ArrayList<>(wishlist.getBooks()));
+    return listedBooksFromWishlist
+        .<ResponseEntity<List<Book>>>map(
+            wishlist -> ResponseEntity.ok(new ArrayList<>(wishlist.getBooks())))
+        .orElseGet(() -> ResponseEntity.notFound().build());
   }
 }
