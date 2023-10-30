@@ -27,7 +27,7 @@ public class BookService {
 
     return bookRepository.findByGenre(genre);
   }
-  
+
   public Optional<Book> findBookId(Long bookId) {
 
     return bookRepository.findById(bookId);

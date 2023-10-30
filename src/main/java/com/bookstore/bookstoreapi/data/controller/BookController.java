@@ -3,8 +3,6 @@ package com.bookstore.bookstoreapi.data.controller;
 import com.bookstore.bookstoreapi.data.entity.Book;
 import com.bookstore.bookstoreapi.data.entity.Comment;
 import com.bookstore.bookstoreapi.data.service.BookService;
-
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -47,7 +45,6 @@ public class BookController {
     return new ResponseEntity<>(HttpStatus.NOT_FOUND);
   }
 
-
   @GetMapping("/{genre}/listBooksByGenre")
   public ResponseEntity<List<Book>> listBooksByGenre(@PathVariable String genre) {
 
@@ -57,7 +54,7 @@ public class BookController {
         .map(ResponseEntity::ok)
         .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
   }
-  
+
   @GetMapping("/{bookID}/comments")
   public ResponseEntity<List<Comment>> listCommentsFromBook(@PathVariable Long bookID) {
 
