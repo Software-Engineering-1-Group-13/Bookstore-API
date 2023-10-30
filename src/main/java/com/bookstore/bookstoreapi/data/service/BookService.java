@@ -21,4 +21,9 @@ public class BookService {
   public Book findByISBN(String ISBN) {
     return bookRepository.findByIsbn(ISBN);
   }
+
+  public Optional<Book> findBookId(Long bookId) {
+
+    return bookRepository.findById(bookId);
+  }
 }
