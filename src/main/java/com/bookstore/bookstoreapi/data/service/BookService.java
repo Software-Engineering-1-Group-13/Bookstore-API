@@ -12,11 +12,18 @@ public class BookService {
   @Autowired private BookRepository bookRepository;
 
   public Optional<Book> createABook(Book book) {
+
     Book creadtedBook = bookRepository.save(book);
+
     return Optional.of(creadtedBook);
   }
 
   public Book findByISBN(String ISBN) {
     return bookRepository.findByIsbn(ISBN);
+  }
+
+  public Optional<Book> findBookId(Long bookId) {
+
+    return bookRepository.findById(bookId);
   }
 }
