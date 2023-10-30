@@ -48,4 +48,12 @@ public class BookController {
         .map(ResponseEntity::ok)
         .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
   }
+
+  @GetMapping("/top10")
+  public ResponseEntity<List<Book>> getTop10Books() {
+
+    List<Book> top10Books = bookService.getTop10Books();
+
+    return ResponseEntity.ok(top10Books);
+  }
 }
