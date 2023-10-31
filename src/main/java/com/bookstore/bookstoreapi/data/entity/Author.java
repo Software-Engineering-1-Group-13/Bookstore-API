@@ -35,4 +35,8 @@ public class Author {
 
   @Column(name = "Publisher", nullable = false)
   private String publisher;
+
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
 }

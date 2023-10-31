@@ -2,19 +2,7 @@ package com.bookstore.bookstoreapi.data.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -47,8 +35,9 @@ public class Book {
   @Column(name = "Title", nullable = false)
   private String title;
 
-  @Column(name = "Author", nullable = false)
-  private String author;
+  @ManyToOne
+  @JoinColumn(name = "AuthorID")
+  private Author author;
 
   @Column(name = "Genre", nullable = false)
   private String genre;
