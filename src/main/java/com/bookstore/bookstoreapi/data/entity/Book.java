@@ -18,7 +18,9 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.Min;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -79,7 +81,7 @@ public class Book {
   @ToString.Exclude
   @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
   @Builder.Default
-  private Set<Comment> comments = new HashSet<>();
+  private List<Comment> comments = new ArrayList<>();
 
   @ToString.Exclude
   @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
