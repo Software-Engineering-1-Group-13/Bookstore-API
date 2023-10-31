@@ -43,4 +43,23 @@ public class BookService {
 
     return bookRepository.findById(bookId);
   }
+
+  public Optional<List<Book>> discountBooksOfPublisher(Double discountRate, String publisherName) {
+
+    List<Book> books = bookRepository.findByPublisher(publisherName);
+    if (books.isEmpty()) {
+      return Optional.empty();
+    }
+
+    books.forEach(
+        book -> {
+          double originalPrice = book.getPrice();
+          double discountPrice = originalPrice * (1 - (discountRate / 100));
+          book.setPrice(discountPrice);
+        });
+
+    bookRepository.saveAll(books);
+
+    return Optional.of(books);
+  }
 }
