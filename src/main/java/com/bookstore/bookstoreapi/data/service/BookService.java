@@ -38,7 +38,7 @@ public class BookService {
 
     return bookRepository.findByAverageRatingGreaterThanEqual(rating);
   }
-  
+
   public Optional<Book> findBookId(Long bookId) {
 
     return bookRepository.findById(bookId);
