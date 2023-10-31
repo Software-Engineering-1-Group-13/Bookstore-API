@@ -8,6 +8,7 @@ import com.bookstore.bookstoreapi.data.repository.BookRepository;
 import com.bookstore.bookstoreapi.data.repository.CommentRepository;
 import com.bookstore.bookstoreapi.data.repository.CustomerRepository;
 import com.bookstore.bookstoreapi.data.repository.RatingRepository;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,11 +40,21 @@ public class RatingService {
     newRating.setRating(rating);
 
     ratingRepository.save(newRating);
+    updateAverageRating(bookOptional.get());
 
     customer.getRatings().add(newRating);
     customerRepository.save(customer);
 
     return Optional.of(newRating);
+  }
+
+  private void updateAverageRating(Book book) {
+
+    List<Rating> ratings = ratingRepository.findByBook(book);
+    double averageRating = ratings.stream().mapToInt(Rating::getRating).average().orElse(0.0);
+
+    book.setAverageRating(averageRating);
+    bookRepository.save(book);
   }
 
   public Optional<Comment> createComment(String comment, Long userID, Long bookID) {

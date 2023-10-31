@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RequestMapping(value = "/books")
 @RestController
+@RequestMapping(value = "/books")
 public class BookController {
 
   @Autowired private BookService bookService;
@@ -55,5 +55,13 @@ public class BookController {
     List<Book> top10Books = bookService.getTop10Books();
 
     return ResponseEntity.ok(top10Books);
+  }
+
+  @GetMapping("/rating/{rating}")
+  public ResponseEntity<List<Book>> getBooksByRating(@PathVariable Double rating) {
+
+    List<Book> books = bookService.getBooksByRating(rating);
+
+    return ResponseEntity.ok(books);
   }
 }

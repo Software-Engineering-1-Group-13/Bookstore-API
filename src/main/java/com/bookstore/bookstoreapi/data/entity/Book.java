@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -67,6 +68,9 @@ public class Book {
   @Column(name = "StockCount", nullable = false)
   private Integer stockCount;
 
+  @Column(name = "AverageRating")
+  private Double averageRating;
+
   @Column(name = "CopiesSold", nullable = false)
   @Builder.Default
   @Min(value = 0, message = "CopiesSold should not be less than 0")
@@ -78,7 +82,7 @@ public class Book {
   private Set<Comment> comments = new HashSet<>();
 
   @ToString.Exclude
-  @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   @Builder.Default
   private Set<Rating> ratings = new HashSet<>();
 
