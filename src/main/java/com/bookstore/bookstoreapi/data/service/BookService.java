@@ -24,6 +24,11 @@ public class BookService {
     return bookRepository.findByIsbn(isbn);
   }
 
+  public Optional<List<Book>> listBooksByGenre(String genre) {
+
+    return bookRepository.findByGenre(genre);
+  }
+
   public Optional<Book> findBookId(Long bookId) {
 
     return bookRepository.findById(bookId);

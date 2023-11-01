@@ -47,6 +47,16 @@ public class BookController {
     return new ResponseEntity<>(books, HttpStatus.OK);
   }
 
+  @GetMapping("/{genre}/listBooksByGenre")
+  public ResponseEntity<List<Book>> listBooksByGenre(@PathVariable String genre) {
+
+    Optional<List<Book>> listBooksByGenre = bookService.listBooksByGenre(genre);
+
+    return listBooksByGenre
+        .map(ResponseEntity::ok)
+        .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+  }
+
   @GetMapping("/{bookID}/comments")
   public ResponseEntity<List<Comment>> listCommentsFromBook(@PathVariable Long bookID) {
 
