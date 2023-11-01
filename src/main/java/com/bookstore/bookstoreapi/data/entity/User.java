@@ -52,6 +52,12 @@ public class User {
 
   @EqualsAndHashCode.Exclude
   @JsonIgnore
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+  @Builder.Default
+  private Set<CreditCard> creditCards = new HashSet<>();
+
+  @EqualsAndHashCode.Exclude
+  @JsonIgnore
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
   @Builder.Default
   private Set<Comment> comments = new HashSet<>();

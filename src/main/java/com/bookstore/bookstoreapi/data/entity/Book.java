@@ -15,8 +15,6 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.Min;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -62,7 +60,6 @@ public class Book {
   @Column(name = "Publisher", nullable = false)
   private String publisher;
 
-  @Temporal(TemporalType.DATE)
   @Column(name = "PublicationDate", nullable = false)
   private LocalDate publishingDate;
 
