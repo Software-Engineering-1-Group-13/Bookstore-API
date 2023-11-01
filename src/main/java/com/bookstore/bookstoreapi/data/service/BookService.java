@@ -25,6 +25,11 @@ public class BookService {
     return bookRepository.findByIsbn(isbn);
   }
 
+  public List<Book> getBooksByAuthorId(Long authorId) {
+
+    return bookRepository.findByAuthorId(authorId);
+  }
+
   public Optional<List<Book>> listBooksByGenre(String genre) {
 
     return bookRepository.findByGenre(genre);
@@ -62,10 +67,5 @@ public class BookService {
     bookRepository.saveAll(books);
 
     return Optional.of(books);
-  }
-  
-  public List<Book> getBooksByAuthorId(Long authorId) {
-
-    return bookRepository.findByAuthorId(authorId);
   }
 }
