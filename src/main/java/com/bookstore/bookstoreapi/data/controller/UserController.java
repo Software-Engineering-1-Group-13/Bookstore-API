@@ -2,9 +2,13 @@ package com.bookstore.bookstoreapi.data.controller;
 
 import com.bookstore.bookstoreapi.data.entity.User;
 import com.bookstore.bookstoreapi.data.service.UserService;
+import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,5 +26,13 @@ public class UserController {
     userService.createUser(user);
 
     return new ResponseEntity<>(HttpStatus.CREATED);
+  }
+
+  @GetMapping("/getUserDetails/{username}")
+  public ResponseEntity<List<User>> getUserDetailsByUsername(@PathVariable String username) {
+
+    Optional<List<User>> user = userService.getUserDetailsByUsername(username);
+
+    return user.map(ResponseEntity::ok).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
   }
 }
