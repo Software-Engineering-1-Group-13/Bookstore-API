@@ -39,4 +39,10 @@ public class CartService {
 
     return Optional.of(customerOptional.get().getCart());
   }
+
+  public Optional<Cart> listBooksInCart(Long userID) {
+
+    Optional<Customer> customerOptional = customerRepository.findById(userID);
+    return customerOptional.map(Customer::getCart);
+  }
 }

@@ -64,6 +64,7 @@ public class WishlistController {
   public ResponseEntity<List<Book>> listBooksFromWishlist(@PathVariable Long wishlistID) {
 
     Optional<Wishlist> listedBooksFromWishlist = wishlistService.listBooksFromWishlist(wishlistID);
+
     return listedBooksFromWishlist
         .<ResponseEntity<List<Book>>>map(
             wishlist -> ResponseEntity.ok(new ArrayList<>(wishlist.getBooks())))
