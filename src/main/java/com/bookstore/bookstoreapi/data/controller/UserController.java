@@ -1,8 +1,8 @@
 package com.bookstore.bookstoreapi.data.controller;
 
+import com.bookstore.bookstoreapi.data.dto.UserUpdateDto;
 import com.bookstore.bookstoreapi.data.entity.User;
 import com.bookstore.bookstoreapi.data.service.UserService;
-import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,10 +30,19 @@ public class UserController {
   }
 
   @GetMapping("/getUserDetails/{username}")
-  public ResponseEntity<List<User>> getUserDetailsByUsername(@PathVariable String username) {
+  public ResponseEntity<User> getUserDetailsByUsername(@PathVariable String username) {
 
-    Optional<List<User>> user = userService.getUserDetailsByUsername(username);
+    Optional<User> user = userService.getUserDetailsByUsername(username);
 
     return user.map(ResponseEntity::ok).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+  }
+
+  @PutMapping("/update/{username}")
+  public ResponseEntity<Void> updateUser(
+      @PathVariable String username, @RequestBody UserUpdateDto userUpdateDto) {
+
+    userService.updateUser(username, userUpdateDto);
+
+    return ResponseEntity.ok().build();
   }
 }
