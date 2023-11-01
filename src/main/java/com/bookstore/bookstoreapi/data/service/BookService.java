@@ -30,17 +30,11 @@ public class BookService {
     return bookRepository.findByGenre(genre);
   }
 
-
-  public Optional<List<Book>> listBooksByGenre(String genre) {
-
-    return bookRepository.findByGenre(genre);
-  }
-
   public List<Book> getTop10Books() {
 
     return bookRepository.findTop10ByOrderByCopiesSoldDesc(PageRequest.of(0, 10));
   }
-  
+
   public Optional<Book> findBookId(Long bookId) {
 
     return bookRepository.findById(bookId);
