@@ -35,6 +35,11 @@ public class BookService {
     return bookRepository.findTop10ByOrderByCopiesSoldDesc(PageRequest.of(0, 10));
   }
 
+  public List<Book> getBooksByRating(Double rating) {
+
+    return bookRepository.findByAverageRatingGreaterThanEqual(rating);
+  }
+
   public Optional<Book> findBookId(Long bookId) {
 
     return bookRepository.findById(bookId);

@@ -16,6 +16,8 @@ import com.bookstore.bookstoreapi.data.repository.CustomerRepository;
 import com.bookstore.bookstoreapi.data.repository.RatingRepository;
 import com.bookstore.bookstoreapi.data.repository.WishlistRepository;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Set;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,9 +27,9 @@ public class DataInitializer {
 
   @Bean
   public CommandLineRunner initData(
+      BookRepository bookRepository,
       CustomerRepository customerRepository,
       WishlistRepository wishlistRepository,
-      BookRepository bookRepository,
       CommentRepository commentRepository,
       RatingRepository ratingRepository,
       CartRepository cartRepository,
@@ -259,6 +261,19 @@ public class DataInitializer {
       bookRepository.save(book1);
       bookRepository.save(book2);
       bookRepository.save(book3);
+      updateInitialAverageRatings(bookRepository);
     };
+  }
+
+  private void updateInitialAverageRatings(BookRepository bookRepository) {
+    List<Book> books = bookRepository.findAll();
+
+    for (Book book : books) {
+      Set<Rating> ratings = book.getRatings();
+      double averageRating = ratings.stream().mapToInt(Rating::getRating).average().orElse(0.0);
+
+      book.setAverageRating(averageRating);
+      bookRepository.save(book);
+    }
   }
 }

@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RequestMapping(value = "/books")
 @RestController
+@RequestMapping(value = "/books")
 public class BookController {
 
   @Autowired private BookService bookService;
@@ -47,6 +47,19 @@ public class BookController {
     return new ResponseEntity<>(books, HttpStatus.OK);
   }
 
+  @GetMapping("/byAuthor/{authorId}")
+  public ResponseEntity<List<Book>> getBooksByAuthor(@PathVariable Long authorId) {
+
+    List<Book> books = bookService.getBooksByAuthorId(authorId);
+
+    if (books.isEmpty()) {
+
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    return new ResponseEntity<>(books, HttpStatus.OK);
+  }
+
   @GetMapping("/{genre}/listBooksByGenre")
   public ResponseEntity<List<Book>> listBooksByGenre(@PathVariable String genre) {
 
@@ -65,6 +78,14 @@ public class BookController {
     return ResponseEntity.ok(top10Books);
   }
 
+  @GetMapping("/rating/{rating}")
+  public ResponseEntity<List<Book>> getBooksByRating(@PathVariable Double rating) {
+
+    List<Book> books = bookService.getBooksByRating(rating);
+
+    return ResponseEntity.ok(books);
+  }
+
   @GetMapping("/{bookID}/comments")
   public ResponseEntity<List<Comment>> listCommentsFromBook(@PathVariable Long bookID) {
 
@@ -76,18 +97,5 @@ public class BookController {
     Book book = findBook.get();
 
     return ResponseEntity.ok(new ArrayList<>(book.getComments()));
-  }
-
-  @GetMapping("/byAuthor/{authorId}")
-  public ResponseEntity<List<Book>> getBooksByAuthor(@PathVariable Long authorId) {
-
-    List<Book> books = bookService.getBooksByAuthorId(authorId);
-
-    if (books.isEmpty()) {
-
-      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-
-    return new ResponseEntity<>(books, HttpStatus.OK);
   }
 }
