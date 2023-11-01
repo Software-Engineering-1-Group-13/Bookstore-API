@@ -35,16 +35,6 @@ public class BookService {
     return bookRepository.findTop10ByOrderByCopiesSoldDesc(PageRequest.of(0, 10));
   }
 
-  public Optional<List<Book>> listBooksByGenre(String genre) {
-
-    return bookRepository.findByGenre(genre);
-  }
-
-  public List<Book> getTop10Books() {
-
-    return bookRepository.findTop10ByOrderByCopiesSoldDesc(PageRequest.of(0, 10));
-  }
-
   public List<Book> getBooksByRating(Double rating) {
 
     return bookRepository.findByAverageRatingGreaterThanEqual(rating);

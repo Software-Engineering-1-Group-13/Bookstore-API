@@ -47,22 +47,17 @@ public class BookController {
     return new ResponseEntity<>(books, HttpStatus.OK);
   }
 
-  @GetMapping("/{genre}/listBooksByGenre")
-  public ResponseEntity<List<Book>> listBooksByGenre(@PathVariable String genre) {
+  @GetMapping("/byAuthor/{authorId}")
+  public ResponseEntity<List<Book>> getBooksByAuthor(@PathVariable Long authorId) {
 
-    Optional<List<Book>> listBooksByGenre = bookService.listBooksByGenre(genre);
+    List<Book> books = bookService.getBooksByAuthorId(authorId);
 
-    return listBooksByGenre
-        .map(ResponseEntity::ok)
-        .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
-  }
+    if (books.isEmpty()) {
 
-  @GetMapping("/top10")
-  public ResponseEntity<List<Book>> getTop10Books() {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 
-    List<Book> top10Books = bookService.getTop10Books();
-
-    return ResponseEntity.ok(top10Books);
+    return new ResponseEntity<>(books, HttpStatus.OK);
   }
 
   @GetMapping("/{genre}/listBooksByGenre")
@@ -102,18 +97,5 @@ public class BookController {
     Book book = findBook.get();
 
     return ResponseEntity.ok(new ArrayList<>(book.getComments()));
-  }
-
-  @GetMapping("/byAuthor/{authorId}")
-  public ResponseEntity<List<Book>> getBooksByAuthor(@PathVariable Long authorId) {
-
-    List<Book> books = bookService.getBooksByAuthorId(authorId);
-
-    if (books.isEmpty()) {
-
-      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-
-    return new ResponseEntity<>(books, HttpStatus.OK);
   }
 }
