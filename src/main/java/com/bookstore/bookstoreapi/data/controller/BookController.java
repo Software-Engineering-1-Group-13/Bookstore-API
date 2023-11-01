@@ -7,6 +7,8 @@ import com.bookstore.bookstoreapi.data.service.BookService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -67,7 +69,7 @@ public class BookController {
     }
 
     Book book = findBook.get();
-    List<Rating> ratings = book.getRatings();
+    Set<Rating> ratings = book.getRatings();
 
     double sum = 0;
     for (Rating rating : ratings) {

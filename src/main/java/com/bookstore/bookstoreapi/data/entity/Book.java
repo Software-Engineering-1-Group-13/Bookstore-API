@@ -82,7 +82,7 @@ public class Book {
   @ToString.Exclude
   @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
   @Builder.Default
-  private List<Rating> ratings = new ArrayList<>();
+  private Set<Rating> ratings = new HashSet<>();
 
   @JsonIgnore
   @ToString.Exclude
