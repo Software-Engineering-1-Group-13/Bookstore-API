@@ -2,6 +2,7 @@ package com.bookstore.bookstoreapi.data.service;
 
 import com.bookstore.bookstoreapi.data.entity.Book;
 import com.bookstore.bookstoreapi.data.repository.BookRepository;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,12 +19,18 @@ public class BookService {
     return Optional.of(creadtedBook);
   }
 
-  public Book findByISBN(String ISBN) {
-    return bookRepository.findByIsbn(ISBN);
+  public List<Book> findByIsbn(String isbn) {
+
+    return bookRepository.findByIsbn(isbn);
   }
 
   public Optional<Book> findBookId(Long bookId) {
 
     return bookRepository.findById(bookId);
+  }
+
+  public List<Book> getBooksByAuthorId(Long authorId) {
+
+    return bookRepository.findByAuthorId(authorId);
   }
 }
