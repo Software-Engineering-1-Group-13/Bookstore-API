@@ -6,7 +6,10 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface BookRepository extends JpaRepository<Book, Long> {
-  Book findByIsbn(String ISBN);
 
+  List<Book> findByIsbn(String isbn);
+
+  List<Book> findByAuthorId(Long AuthorId);
+  
   Optional<List<Book>> findByGenre(String genre);
 }
