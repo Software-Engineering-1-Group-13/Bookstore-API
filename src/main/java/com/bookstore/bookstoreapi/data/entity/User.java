@@ -1,5 +1,6 @@
 package com.bookstore.bookstoreapi.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -50,21 +51,25 @@ public class User {
   private String homeAddress;
 
   @EqualsAndHashCode.Exclude
+  @JsonIgnore
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
   @Builder.Default
   private Set<Comment> comments = new HashSet<>();
 
   @EqualsAndHashCode.Exclude
+  @JsonIgnore
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
   @Builder.Default
   private Set<Rating> ratings = new HashSet<>();
 
   @ToString.Exclude
+  @JsonIgnore
   @Builder.Default
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
   private Set<Wishlist> wishlists = new HashSet<>();
 
   @EqualsAndHashCode.Exclude
+  @JsonIgnore
   @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
   private Cart cart;
 
