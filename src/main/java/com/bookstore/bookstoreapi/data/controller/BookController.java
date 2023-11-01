@@ -14,12 +14,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@RequestMapping(value = "/books")
 @RestController
+@RequestMapping(value = "/books")
 public class BookController {
 
   @Autowired private BookService bookService;
@@ -49,6 +51,45 @@ public class BookController {
     return new ResponseEntity<>(books, HttpStatus.OK);
   }
 
+  @GetMapping("/byAuthor/{authorId}")
+  public ResponseEntity<List<Book>> getBooksByAuthor(@PathVariable Long authorId) {
+
+    List<Book> books = bookService.getBooksByAuthorId(authorId);
+
+    if (books.isEmpty()) {
+
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    return new ResponseEntity<>(books, HttpStatus.OK);
+  }
+
+  @GetMapping("/{genre}/listBooksByGenre")
+  public ResponseEntity<List<Book>> listBooksByGenre(@PathVariable String genre) {
+
+    Optional<List<Book>> listBooksByGenre = bookService.listBooksByGenre(genre);
+
+    return listBooksByGenre
+        .map(ResponseEntity::ok)
+        .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+  }
+
+  @GetMapping("/top10")
+  public ResponseEntity<List<Book>> getTop10Books() {
+
+    List<Book> top10Books = bookService.getTop10Books();
+
+    return ResponseEntity.ok(top10Books);
+  }
+
+  @GetMapping("/rating/{rating}")
+  public ResponseEntity<List<Book>> getBooksByRating(@PathVariable Double rating) {
+
+    List<Book> books = bookService.getBooksByRating(rating);
+
+    return ResponseEntity.ok(books);
+  }
+
   @GetMapping("/{bookID}/comments")
   public ResponseEntity<List<Comment>> listCommentsFromBook(@PathVariable Long bookID) {
 
@@ -61,6 +102,7 @@ public class BookController {
 
     return ResponseEntity.ok(new ArrayList<>(book.getComments()));
   }
+
 
   @GetMapping("/{bookID}/average rating")
   public ResponseEntity<Double> calculateAvgRating(@PathVariable Long bookID) {
@@ -87,10 +129,18 @@ public class BookController {
     List<Book> books = bookService.getBooksByAuthorId(authorId);
 
     if (books.isEmpty()) {
+  }
+    
+  @PutMapping("/author/discountBooks")
+  public ResponseEntity<Void> discountBooksOfPublisher(
+      @RequestParam Double discountRate, @RequestParam String publisherName) {
 
+    Optional<List<Book>> discountBooksOfPublisher =
+        bookService.discountBooksOfPublisher(discountRate, publisherName);
+    if (discountBooksOfPublisher.isEmpty()) {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    return new ResponseEntity<>(books, HttpStatus.OK);
+    return new ResponseEntity<>(HttpStatus.OK);
   }
 }

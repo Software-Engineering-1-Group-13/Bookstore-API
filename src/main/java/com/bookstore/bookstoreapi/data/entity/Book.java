@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -14,8 +15,6 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.Min;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -61,7 +60,6 @@ public class Book {
   @Column(name = "Publisher", nullable = false)
   private String publisher;
 
-  @Temporal(TemporalType.DATE)
   @Column(name = "PublicationDate", nullable = false)
   private LocalDate publishingDate;
 
@@ -70,6 +68,9 @@ public class Book {
 
   @Column(name = "StockCount", nullable = false)
   private Integer stockCount;
+
+  @Column(name = "AverageRating")
+  private Double averageRating;
 
   @Column(name = "CopiesSold", nullable = false)
   @Builder.Default
@@ -82,7 +83,7 @@ public class Book {
   private List<Comment> comments = new ArrayList<>();
 
   @ToString.Exclude
-  @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   @Builder.Default
   private Set<Rating> ratings = new HashSet<>();
 
