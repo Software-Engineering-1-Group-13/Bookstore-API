@@ -8,6 +8,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import java.util.HashSet;
 import java.util.Set;
@@ -17,48 +19,59 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
-@Table(name = "Customer")
+@Table(name = "\"User\"")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Customer {
+public class User {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name = "CustomerID")
+  @Column(name = "UserID")
   private Long id;
 
-  @Column(name = "FirstName", nullable = false)
-  private String firstName;
+  @Column(name = "Username", nullable = false, unique = true)
+  private String username;
 
-  @Column(name = "LastName", nullable = false)
-  private String lastName;
+  @Column(name = "Password", nullable = false)
+  private String password;
 
-  @Column(name = "Email", nullable = false, unique = true)
-  private String email;
+  @Column(name = "Name")
+  private String name;
 
-  @Column(name = "Address", nullable = false)
-  private String address;
+  @Column(name = "Email Address", unique = true)
+  private String emailAddress;
+
+  @Column(name = "Home Address")
+  private String homeAddress;
 
   @EqualsAndHashCode.Exclude
-  @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
   @Builder.Default
   private Set<Comment> comments = new HashSet<>();
 
   @EqualsAndHashCode.Exclude
-  @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
   @Builder.Default
   private Set<Rating> ratings = new HashSet<>();
 
   @ToString.Exclude
   @Builder.Default
-  @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
   private Set<Wishlist> wishlists = new HashSet<>();
 
   @EqualsAndHashCode.Exclude
-  @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL)
+  @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
   private Cart cart;
+
+  @PrePersist
+  @PreUpdate
+  private void hashPassword() {
+    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    this.password = passwordEncoder.encode(this.password);
+  }
 }

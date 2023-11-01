@@ -38,7 +38,7 @@ public class Wishlist {
   @JsonIgnore
   @ManyToOne
   @JoinColumn(name = "UserID", insertable = false, updatable = false)
-  private Customer customer;
+  private User user;
 
   @ToString.Exclude
   @Builder.Default

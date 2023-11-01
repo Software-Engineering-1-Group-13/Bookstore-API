@@ -34,8 +34,8 @@ public class Cart {
 
   @EqualsAndHashCode.Exclude
   @OneToOne
-  @JoinColumn(name = "CustomerID")
-  private Customer customer;
+  @JoinColumn(name = "UserID")
+  private User user;
 
   @ToString.Exclude
   @Builder.Default

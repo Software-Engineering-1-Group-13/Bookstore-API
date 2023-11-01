@@ -44,5 +44,5 @@ public class Comment {
   @JsonIgnore
   @ManyToOne
   @JoinColumn(name = "UserID")
-  private Customer customer;
+  private User user;
 }
