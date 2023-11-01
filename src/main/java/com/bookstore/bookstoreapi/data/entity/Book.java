@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
@@ -48,8 +49,9 @@ public class Book {
   @Column(name = "Title", nullable = false)
   private String title;
 
-  @Column(name = "Author", nullable = false)
-  private String author;
+  @ManyToOne
+  @JoinColumn(name = "AuthorID")
+  private Author author;
 
   @Column(name = "Genre", nullable = false)
   private String genre;
