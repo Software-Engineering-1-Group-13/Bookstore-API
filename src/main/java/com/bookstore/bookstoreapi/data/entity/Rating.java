@@ -51,5 +51,5 @@ public class Rating {
   @JsonIgnore
   @ManyToOne
   @JoinColumn(name = "UserID")
-  private Customer customer;
+  private User user;
 }

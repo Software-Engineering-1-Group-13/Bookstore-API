@@ -1,8 +1,8 @@
 package com.bookstore.bookstoreapi.data.repository;
 
-import com.bookstore.bookstoreapi.data.entity.Customer;
+import com.bookstore.bookstoreapi.data.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CustomerRepository extends JpaRepository<Customer, Long> {}
+public interface UserRepository extends JpaRepository<User, Long> {}

@@ -2,10 +2,10 @@ package com.bookstore.bookstoreapi.data.service;
 
 import com.bookstore.bookstoreapi.data.entity.Book;
 import com.bookstore.bookstoreapi.data.entity.Cart;
-import com.bookstore.bookstoreapi.data.entity.Customer;
+import com.bookstore.bookstoreapi.data.entity.User;
 import com.bookstore.bookstoreapi.data.repository.BookRepository;
 import com.bookstore.bookstoreapi.data.repository.CartRepository;
-import com.bookstore.bookstoreapi.data.repository.CustomerRepository;
+import com.bookstore.bookstoreapi.data.repository.UserRepository;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ public class CartService {
 
   @Autowired CartRepository cartRepository;
   @Autowired BookRepository bookRepository;
-  @Autowired CustomerRepository customerRepository;
+  @Autowired UserRepository userRepository;
 
   public Optional<Double> getCartSubtotal(Long cartID) {
 
@@ -25,38 +25,38 @@ public class CartService {
   public Optional<Cart> addBookToCart(Long bookID, Long userID) {
 
     Optional<Book> bookOptional = bookRepository.findById(bookID);
-    Optional<Customer> customerOptional = customerRepository.findById(userID);
-    if (bookOptional.isEmpty() || customerOptional.isEmpty()) {
+    Optional<User> userOptional = userRepository.findById(userID);
+    if (bookOptional.isEmpty() || userOptional.isEmpty()) {
       return Optional.empty();
     }
 
-    if (customerOptional.get().getCart().getBooks().contains(bookOptional.get())) {
+    if (userOptional.get().getCart().getBooks().contains(bookOptional.get())) {
       return Optional.empty();
     }
 
-    customerOptional.get().getCart().getBooks().add(bookOptional.get());
-    cartRepository.save(customerOptional.get().getCart());
+    userOptional.get().getCart().getBooks().add(bookOptional.get());
+    cartRepository.save(userOptional.get().getCart());
 
-    return Optional.of(customerOptional.get().getCart());
+    return Optional.of(userOptional.get().getCart());
   }
 
   public Optional<Cart> listBooksInCart(Long userID) {
 
-    Optional<Customer> customerOptional = customerRepository.findById(userID);
-    return customerOptional.map(Customer::getCart);
+    Optional<User> userOptional = userRepository.findById(userID);
+    return userOptional.map(User::getCart);
   }
 
   public Optional<Cart> removeBookFromCart(Long bookID, Long userID) {
 
     Optional<Book> bookOptional = bookRepository.findById(bookID);
-    Optional<Customer> customerOptional = customerRepository.findById(userID);
+    Optional<User> userOptional = userRepository.findById(userID);
 
-    if (bookOptional.isEmpty() || customerOptional.isEmpty()) {
+    if (bookOptional.isEmpty() || userOptional.isEmpty()) {
       return Optional.empty();
     }
 
     Book book = bookOptional.get();
-    Cart cart = customerOptional.get().getCart();
+    Cart cart = userOptional.get().getCart();
 
     if (cart.getBooks().contains(book)) {
       cart.getBooks().remove(book);

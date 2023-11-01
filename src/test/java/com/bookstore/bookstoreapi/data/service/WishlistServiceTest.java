@@ -7,10 +7,10 @@ import static org.mockito.Mockito.when;
 
 import com.bookstore.bookstoreapi.BookstoreTestConstants;
 import com.bookstore.bookstoreapi.data.entity.Book;
-import com.bookstore.bookstoreapi.data.entity.Customer;
+import com.bookstore.bookstoreapi.data.entity.User;
 import com.bookstore.bookstoreapi.data.entity.Wishlist;
 import com.bookstore.bookstoreapi.data.repository.BookRepository;
-import com.bookstore.bookstoreapi.data.repository.CustomerRepository;
+import com.bookstore.bookstoreapi.data.repository.UserRepository;
 import com.bookstore.bookstoreapi.data.repository.WishlistRepository;
 import java.text.ParseException;
 import java.time.LocalDate;
@@ -32,7 +32,7 @@ class WishlistServiceTest {
   @InjectMocks private WishlistService wishlistService;
   @Mock private WishlistRepository wishlistRepository;
   @Mock private BookRepository bookRepository;
-  @Mock private CustomerRepository customerRepository;
+  @Mock private UserRepository userRepository;
 
   @BeforeEach
   void setUp() {
@@ -40,12 +40,12 @@ class WishlistServiceTest {
   }
 
   @Test
-  void testCreateWishlist_CustomerDoesNotExist() {
+  void testCreateWishlist_UserDoesNotExist() {
 
     Wishlist dummyWishlist = new Wishlist();
     dummyWishlist.setName("My Cool Books");
 
-    when(customerRepository.findById(1L)).thenReturn(Optional.empty());
+    when(userRepository.findById(1L)).thenReturn(Optional.empty());
 
     Optional<Wishlist> result = wishlistService.createWishlist(dummyWishlist.getName(), 1L);
 
@@ -57,15 +57,14 @@ class WishlistServiceTest {
 
     Wishlist wishlist = new Wishlist();
     wishlist.setName("My Cool Books");
-    Customer user = new Customer();
+    User user = new User();
     user.getWishlists().add(wishlist);
 
     List<Wishlist> wishlistList = new ArrayList<>();
     wishlistList.add(wishlist);
 
-    when(customerRepository.findById(1L)).thenReturn(Optional.of(user));
-    when(wishlistRepository.findByCustomerAndName(user, wishlist.getName()))
-        .thenReturn(wishlistList);
+    when(userRepository.findById(1L)).thenReturn(Optional.of(user));
+    when(wishlistRepository.findByUserAndName(user, wishlist.getName())).thenReturn(wishlistList);
 
     Optional<Wishlist> result = wishlistService.createWishlist(wishlist.getName(), 1L);
 
@@ -75,8 +74,8 @@ class WishlistServiceTest {
   @Test
   void testCreateWishlist_CreateWishlist() {
 
-    Customer user = new Customer();
-    when(customerRepository.findById(1L)).thenReturn(Optional.of(user));
+    User user = new User();
+    when(userRepository.findById(1L)).thenReturn(Optional.of(user));
 
     Optional<Wishlist> result = wishlistService.createWishlist("My Cool Books", 1L);
 

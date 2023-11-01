@@ -4,14 +4,14 @@ import com.bookstore.bookstoreapi.BookstoreConstants;
 import com.bookstore.bookstoreapi.data.entity.Book;
 import com.bookstore.bookstoreapi.data.entity.Cart;
 import com.bookstore.bookstoreapi.data.entity.Comment;
-import com.bookstore.bookstoreapi.data.entity.Customer;
 import com.bookstore.bookstoreapi.data.entity.Rating;
+import com.bookstore.bookstoreapi.data.entity.User;
 import com.bookstore.bookstoreapi.data.entity.Wishlist;
 import com.bookstore.bookstoreapi.data.repository.BookRepository;
 import com.bookstore.bookstoreapi.data.repository.CartRepository;
 import com.bookstore.bookstoreapi.data.repository.CommentRepository;
-import com.bookstore.bookstoreapi.data.repository.CustomerRepository;
 import com.bookstore.bookstoreapi.data.repository.RatingRepository;
+import com.bookstore.bookstoreapi.data.repository.UserRepository;
 import com.bookstore.bookstoreapi.data.repository.WishlistRepository;
 import java.time.LocalDate;
 import java.util.List;
@@ -26,29 +26,31 @@ public class DataInitializer {
   @Bean
   public CommandLineRunner initData(
       BookRepository bookRepository,
-      CustomerRepository customerRepository,
+      UserRepository userRepository,
       WishlistRepository wishlistRepository,
       CommentRepository commentRepository,
       RatingRepository ratingRepository,
       CartRepository cartRepository) {
     return args -> {
-      Customer john = new Customer();
-      john.setFirstName("John");
-      john.setLastName("Doe");
-      john.setEmail("john.doe@example.com");
-      john.setAddress("12345 Random st");
-      customerRepository.save(john);
+      User john = new User();
+      john.setUsername("Johnny123");
+      john.setPassword("JohnLolly123");
+      john.setName("John Doe");
+      john.setEmailAddress("john.doe@example.com");
+      john.setHomeAddress("12345 Random st");
+      userRepository.save(john);
 
-      Customer jane = new Customer();
-      jane.setFirstName("Jane");
-      jane.setLastName("Smith");
-      jane.setEmail("jane.smith@example.com");
-      jane.setAddress("12345 non-Random st");
-      customerRepository.save(jane);
+      User jane = new User();
+      jane.setUsername("Janey1993");
+      jane.setPassword("JaneSerial!1");
+      jane.setName("Jane Smith");
+      jane.setEmailAddress("jane.smith@example.com");
+      jane.setHomeAddress("12345 non-Random st");
+      userRepository.save(jane);
 
       Wishlist johnWishList = new Wishlist();
       johnWishList.setName("John's Favorites");
-      johnWishList.setCustomer(john);
+      johnWishList.setUser(john);
       wishlistRepository.save(johnWishList);
 
       Book book1 = new Book();
@@ -144,13 +146,13 @@ public class DataInitializer {
       bookRepository.save(book6);
 
       Cart johnCart = new Cart();
-      johnCart.setCustomer(john);
+      johnCart.setUser(john);
       johnCart.getBooks().add(book1);
       johnCart.getBooks().add(book2);
       johnCart.getBooks().add(book3);
 
       Cart janeCart = new Cart();
-      janeCart.setCustomer(jane);
+      janeCart.setUser(jane);
 
       cartRepository.save(johnCart);
       cartRepository.save(janeCart);
@@ -168,12 +170,12 @@ public class DataInitializer {
       wishlistRepository.save(johnWishList);
 
       Rating rating1 = new Rating();
-      rating1.setCustomer(john);
+      rating1.setUser(john);
       rating1.setBook(book1);
       rating1.setRating(3);
 
       Comment comment1 = new Comment();
-      comment1.setCustomer(john);
+      comment1.setUser(john);
       comment1.setBook(book1);
       comment1.setComment("Wow! Super awesome book!");
 
@@ -192,7 +194,7 @@ public class DataInitializer {
       ratingRepository.save(rating1);
       john.getRatings().add(rating1);
       book1.getRatings().add(rating1);
-      customerRepository.save(john);
+      userRepository.save(john);
       bookRepository.save(book1);
       bookRepository.save(book2);
       bookRepository.save(book3);
