@@ -103,7 +103,6 @@ public class BookController {
     return ResponseEntity.ok(new ArrayList<>(book.getComments()));
   }
 
-
   @GetMapping("/{bookID}/average rating")
   public ResponseEntity<Double> calculateAvgRating(@PathVariable Long bookID) {
 
@@ -122,15 +121,7 @@ public class BookController {
 
     return ResponseEntity.ok(sum / ratings.size());
   }
-  
-  @GetMapping("/byAuthor/{authorId}")
-  public ResponseEntity<List<Book>> getBooksByAuthor(@PathVariable Long authorId) {
 
-    List<Book> books = bookService.getBooksByAuthorId(authorId);
-
-    if (books.isEmpty()) {
-  }
-    
   @PutMapping("/author/discountBooks")
   public ResponseEntity<Void> discountBooksOfPublisher(
       @RequestParam Double discountRate, @RequestParam String publisherName) {
