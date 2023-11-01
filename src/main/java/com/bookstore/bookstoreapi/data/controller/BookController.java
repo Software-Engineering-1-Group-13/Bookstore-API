@@ -28,22 +28,34 @@ public class BookController {
 
     Optional<Book> createdBook = bookService.createABook(book);
     if (createdBook.isEmpty()) {
+
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     return new ResponseEntity<>(createdBook.get(), HttpStatus.CREATED);
   }
 
-  @GetMapping("/{ISBN}")
-  public ResponseEntity<Book> findByISBN(@PathVariable String ISBN) {
+  @GetMapping("/{isbn}")
+  public ResponseEntity<List<Book>> findByIsbn(@PathVariable String isbn) {
 
-    Book book = bookService.findByISBN(ISBN);
+    List<Book> books = bookService.findByIsbn(isbn);
 
-    if (book != null) {
-      return new ResponseEntity<>(book, HttpStatus.OK);
+    if (books.isEmpty()) {
+
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    return new ResponseEntity<>(books, HttpStatus.OK);
+  }
+
+  @GetMapping("/{genre}/listBooksByGenre")
+  public ResponseEntity<List<Book>> listBooksByGenre(@PathVariable String genre) {
+
+    Optional<List<Book>> listBooksByGenre = bookService.listBooksByGenre(genre);
+
+    return listBooksByGenre
+        .map(ResponseEntity::ok)
+        .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
   }
 
 
@@ -70,10 +82,24 @@ public class BookController {
 
     Optional<Book> findBook = bookService.findBookId(bookID);
     if (findBook.isEmpty()) {
+
       return ResponseEntity.notFound().build();
     }
-
     Book book = findBook.get();
+
     return ResponseEntity.ok(new ArrayList<>(book.getComments()));
+  }
+
+  @GetMapping("/byAuthor/{authorId}")
+  public ResponseEntity<List<Book>> getBooksByAuthor(@PathVariable Long authorId) {
+
+    List<Book> books = bookService.getBooksByAuthorId(authorId);
+
+    if (books.isEmpty()) {
+
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    return new ResponseEntity<>(books, HttpStatus.OK);
   }
 }
