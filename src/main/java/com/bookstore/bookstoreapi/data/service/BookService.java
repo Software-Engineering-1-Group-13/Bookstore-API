@@ -20,8 +20,14 @@ public class BookService {
     return Optional.of(creadtedBook);
   }
 
-  public Book findByISBN(String ISBN) {
-    return bookRepository.findByIsbn(ISBN);
+  public List<Book> findByIsbn(String isbn) {
+
+    return bookRepository.findByIsbn(isbn);
+  }
+
+  public List<Book> getBooksByAuthorId(Long authorId) {
+
+    return bookRepository.findByAuthorId(authorId);
   }
 
   public Optional<List<Book>> listBooksByGenre(String genre) {
