@@ -25,6 +25,11 @@ public class BookService {
     return bookRepository.findByIsbn(isbn);
   }
 
+  public List<Book> getBooksByAuthorId(Long authorId) {
+
+    return bookRepository.findByAuthorId(authorId);
+  }
+
   public Optional<List<Book>> listBooksByGenre(String genre) {
 
     return bookRepository.findByGenre(genre);
@@ -45,8 +50,22 @@ public class BookService {
     return bookRepository.findById(bookId);
   }
 
-  public List<Book> getBooksByAuthorId(Long authorId) {
+  public Optional<List<Book>> discountBooksOfPublisher(Double discountRate, String publisherName) {
 
-    return bookRepository.findByAuthorId(authorId);
+    List<Book> books = bookRepository.findByPublisher(publisherName);
+    if (books.isEmpty()) {
+      return Optional.empty();
+    }
+
+    books.forEach(
+        book -> {
+          double originalPrice = book.getPrice();
+          double discountPrice = originalPrice * (1 - (discountRate / 100));
+          book.setPrice(discountPrice);
+        });
+
+    bookRepository.saveAll(books);
+
+    return Optional.of(books);
   }
 }
