@@ -57,6 +57,14 @@ public class BookController {
         .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
   }
 
+  @GetMapping("/top10")
+  public ResponseEntity<List<Book>> getTop10Books() {
+
+    List<Book> top10Books = bookService.getTop10Books();
+
+    return ResponseEntity.ok(top10Books);
+  }
+
   @GetMapping("/{bookID}/comments")
   public ResponseEntity<List<Comment>> listCommentsFromBook(@PathVariable Long bookID) {
 
