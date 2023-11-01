@@ -2,10 +2,12 @@ package com.bookstore.bookstoreapi.data.controller;
 
 import com.bookstore.bookstoreapi.data.entity.Book;
 import com.bookstore.bookstoreapi.data.entity.Comment;
+import com.bookstore.bookstoreapi.data.entity.Rating;
 import com.bookstore.bookstoreapi.data.service.BookService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -99,6 +101,25 @@ public class BookController {
     Book book = findBook.get();
 
     return ResponseEntity.ok(new ArrayList<>(book.getComments()));
+  }
+
+  @GetMapping("/{bookID}/average rating")
+  public ResponseEntity<Double> calculateAvgRating(@PathVariable Long bookID) {
+
+    Optional<Book> findBook = bookService.findBookId(bookID);
+    if (findBook.isEmpty()) {
+      return ResponseEntity.notFound().build();
+    }
+
+    Book book = findBook.get();
+    Set<Rating> ratings = book.getRatings();
+
+    double sum = 0;
+    for (Rating rating : ratings) {
+      sum += rating.getRating();
+    }
+
+    return ResponseEntity.ok(sum / ratings.size());
   }
 
   @PutMapping("/author/discountBooks")
