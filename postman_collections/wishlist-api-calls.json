@@ -3,38 +3,37 @@
 		"_postman_id": "c6da2f17-1f16-4e1e-886b-5ac94112e361",
 		"name": "BookstoreAPIs",
 		"description": "This collection is for all our test calls, which are\n\n- 6 features,\n    \n    - 4 RESTful API calls per feature.",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29813741",
+		"_collection_link": "https://ivanoskiharmonia.postman.co/workspace/ivanoskiHarmonia-Workspace~6a770b2f-705c-48d6-8fdb-8ea0aa305301/collection/29813741-c6da2f17-1f16-4e1e-886b-5ac94112e361?action=share&source=collection_link&creator=29813741"
 	},
 	"item": [
 		{
-			"name": "Wishlist",
+			"name": "Wish List Management",
 			"item": [
 				{
 					"name": "API 1 - create wishlists",
 					"item": [
 						{
 							"name": "201 - created wishlist",
-							"id": "762b5ae5-5f99-45d8-bc97-edf345a13c80",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
 							"request": {
 								"method": "POST",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/wishlist?wishlistName=My Cool Books&userID=1",
+									"raw": "http://localhost:8080/wishlist/create?wishlistName=MyCoolBooks&userID=1",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"wishlist"
+										"wishlist",
+										"create"
 									],
 									"query": [
 										{
 											"key": "wishlistName",
-											"value": "My Cool Books"
+											"value": "MyCoolBooks"
 										},
 										{
 											"key": "userID",
@@ -47,33 +46,28 @@
 						},
 						{
 							"name": "404 - UserID not found",
-							"id": "66237a26-f278-4044-b770-74a2053526d2",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
 							"request": {
 								"method": "POST",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/wishlist?wishlistName=MyCoolBooks&userID=10",
+									"raw": "http://localhost:8080/wishlist/create?wishlistName=MyCoolBooks&userID=10",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"wishlist"
+										"wishlist",
+										"create"
 									],
 									"query": [
 										{
 											"key": "wishlistName",
-											"value": "MyCoolBooks",
-											"type": "text"
+											"value": "MyCoolBooks"
 										},
 										{
 											"key": "userID",
-											"value": "10",
-											"type": "text"
+											"value": "10"
 										}
 									]
 								}
@@ -82,22 +76,19 @@
 						},
 						{
 							"name": "500 - wishlist exits",
-							"id": "3c7a299e-9891-44ab-911e-fc9bf21f1f05",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
 							"request": {
 								"method": "POST",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/wishlist?wishlistName=John's Favorites&userID=1",
+									"raw": "http://localhost:8080/wishlist/create?wishlistName=John's Favorites&userID=1",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"wishlist"
+										"wishlist",
+										"create"
 									],
 									"query": [
 										{
@@ -114,7 +105,6 @@
 							"response": []
 						}
 					],
-					"id": "1032026e-2c86-4640-ba66-e6c7e07ad76c",
 					"description": "## Feature Overview\n\n### Summary\n\nAdd functionality to create a wishlist for a user with a unique name.\n\n### Rationale\n\n- **Motivation**: Users should be able to curate and personalize a list of books they're interested in.\n    \n- **Functionality**: This feature will allow users to create a wishlist by providing their user ID and a wishlist name.\n    \n- **Impact**: Mainly affects user-related services and the `wishlist` database table.\n    \n\n### Acceptance Criteria\n\n- New endpoint: `POST /wishlist`\n    \n- Parameters Sent: `Wishlist name`, `User Id`\n    \n- Successful response: HTTP 201 Created with no content\n    \n    - If User does not exist return `404 Not Found`\n        \n    - If wishlistName exists return `500 Internal Server Error`\n        \n\n### Additional Information\n\nEnsure wishlist names are unique for each user. Testing should cover scenarios where a user tries to create a wishlist with a name that already exists."
 				},
 				{
@@ -122,15 +112,11 @@
 					"item": [
 						{
 							"name": "200 - adds book to wishlist",
-							"id": "3922406e-898e-422f-9c39-6c52d479a238",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
 							"request": {
 								"method": "POST",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/wishlist/book?bookID=3&wishlistID=1",
+									"raw": "http://localhost:8080/wishlist/add-book?bookID=3&wishlistID=1",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -138,7 +124,7 @@
 									"port": "8080",
 									"path": [
 										"wishlist",
-										"book"
+										"add-book"
 									],
 									"query": [
 										{
@@ -156,15 +142,11 @@
 						},
 						{
 							"name": "200 - adds second book",
-							"id": "1d7d887e-bd75-42ea-9d56-729e68afbf37",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
 							"request": {
 								"method": "POST",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/wishlist/book?bookID=1&wishlistID=1",
+									"raw": "http://localhost:8080/wishlist/add-book?bookID=6&wishlistID=1",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -172,12 +154,12 @@
 									"port": "8080",
 									"path": [
 										"wishlist",
-										"book"
+										"add-book"
 									],
 									"query": [
 										{
 											"key": "bookID",
-											"value": "1"
+											"value": "6"
 										},
 										{
 											"key": "wishlistID",
@@ -190,15 +172,11 @@
 						},
 						{
 							"name": "400 - non-existent bookID",
-							"id": "41f91ea8-4a9c-4f94-900d-bb461e54fad6",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
 							"request": {
 								"method": "POST",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/wishlist/book?bookID=10&wishlistID=1",
+									"raw": "http://localhost:8080/wishlist/add-book?bookID=10&wishlistID=1",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -206,7 +184,7 @@
 									"port": "8080",
 									"path": [
 										"wishlist",
-										"book"
+										"add-book"
 									],
 									"query": [
 										{
@@ -224,15 +202,11 @@
 						},
 						{
 							"name": "400 - non-existent wishlistID",
-							"id": "9cf789d6-4354-49b9-bc18-a947d6681a44",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
 							"request": {
 								"method": "POST",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/wishlist/book?bookID=1&wishlistID=10",
+									"raw": "http://localhost:8080/wishlist/add-book?bookID=1&wishlistID=10",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -240,7 +214,7 @@
 									"port": "8080",
 									"path": [
 										"wishlist",
-										"book"
+										"add-book"
 									],
 									"query": [
 										{
@@ -257,7 +231,6 @@
 							"response": []
 						}
 					],
-					"id": "9f023c74-8cdd-407e-b84c-25ba6f1cae60",
 					"description": "## Feature Overview\n\n### Summary\n\nIntroduce functionality to add a book to a user's existing wishlist.\n\n### Rationale\n\n- **Motivation**: Users need to be able to populate their wishlists with books they find appealing.\n    \n- **Functionality**: By providing a book ID and a wishlist ID, the selected book will be added to the specified wishlist.\n    \n- **Impact**: Affects `wishlist`, `books`, and the intermediary table that handles the many-to-many relation.\n    \n\n### Acceptance Criteria\n\n- New endpoint: `POST /wishlist/addBook`\n    \n- Parameters Sent: `Book Id`, `Wishlist Id`\n    \n- Successful response: HTTP 200 OK with no content\n    \n\n### Additional Information\n\nTests should handle scenarios where a book is already in the wishlist or if the provided book or wishlist IDs don't exist."
 				},
 				{
@@ -265,15 +238,11 @@
 					"item": [
 						{
 							"name": "200 - removes first book",
-							"id": "9da21973-164c-444c-8d55-4ecee43c48d6",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
 							"request": {
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/wishlist/removeBook?bookID=1&wishlistID=1",
+									"raw": "http://localhost:8080/wishlist/remove-book?bookID=1&wishlistID=1",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -281,7 +250,7 @@
 									"port": "8080",
 									"path": [
 										"wishlist",
-										"removeBook"
+										"remove-book"
 									],
 									"query": [
 										{
@@ -299,15 +268,11 @@
 						},
 						{
 							"name": "200 - removes second book",
-							"id": "c6f64b57-5e45-4515-9ace-b7b409b520a9",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
 							"request": {
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/wishlist/removeBook?bookID=2&wishlistID=1",
+									"raw": "http://localhost:8080/wishlist/remove-book?bookID=2&wishlistID=1",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -315,7 +280,7 @@
 									"port": "8080",
 									"path": [
 										"wishlist",
-										"removeBook"
+										"remove-book"
 									],
 									"query": [
 										{
@@ -333,15 +298,11 @@
 						},
 						{
 							"name": "404 - remove non-existent book",
-							"id": "89f8e1ef-08e6-41d8-b406-5f4aad260a48",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
 							"request": {
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/wishlist/removeBook?bookID=10&wishlistID=1",
+									"raw": "http://localhost:8080/wishlist/remove-book?bookID=10&wishlistID=1",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -349,7 +310,7 @@
 									"port": "8080",
 									"path": [
 										"wishlist",
-										"removeBook"
+										"remove-book"
 									],
 									"query": [
 										{
@@ -367,15 +328,11 @@
 						},
 						{
 							"name": "404 - remove from non-existent wishlist",
-							"id": "e18db7a3-17f4-49bd-b99f-1ab0fbfc2b73",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
 							"request": {
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/wishlist/removeBook?bookID=1&wishlistID=10",
+									"raw": "http://localhost:8080/wishlist/remove-book?bookID=1&wishlistID=10",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -383,7 +340,7 @@
 									"port": "8080",
 									"path": [
 										"wishlist",
-										"removeBook"
+										"remove-book"
 									],
 									"query": [
 										{
@@ -400,7 +357,6 @@
 							"response": []
 						}
 					],
-					"id": "f19d7e42-265b-4297-9540-51edef844238",
 					"description": "## Feature Overview\n\n### Summary\n\nFacilitate the removal of a book from a user's wishlist.\n\n### Rationale\n\n- **Motivation**: Sometimes, users change their minds and might want to remove books from their wishlists.\n    \n- **Functionality**: Using the book ID and wishlist ID, the API will handle the removal process.\n    \n- **Impact**: Affects `wishlist`, `books`, and their intermediary relation.\n    \n\n### Acceptance Criteria\n\n- New endpoint: `DELETE /wishlist/removeBook`\n    \n- Parameters Sent: `Book Id`, `Wishlist Id`\n    \n- Successful response: HTTP 200 OK with no content\n    \n\n### Additional Information\n\nEnsure that testing covers situations where the book isn't initially in the wishlist or the provided IDs are invalid."
 				},
 				{
@@ -408,37 +364,1110 @@
 					"item": [
 						{
 							"name": "200 - check existing wishlist",
-							"id": "f986ce42-7d99-4fd7-8685-1527ed3ef79c",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "http://localhost:8080/wishlist/1/books"
+								"url": {
+									"raw": "http://localhost:8080/wishlist/list-books/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"wishlist",
+										"list-books",
+										"1"
+									]
+								}
 							},
 							"response": []
 						},
 						{
 							"name": "404 - check non-existing wishlist",
-							"id": "9e7f1efc-9388-432c-aedc-4694ecc938f6",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "http://localhost:8080/wishlist/10/books"
+								"url": {
+									"raw": "http://localhost:8080/wishlist/list-books/10",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"wishlist",
+										"list-books",
+										"10"
+									]
+								}
 							},
 							"response": []
 						}
 					],
-					"id": "6bfcd2e3-2647-45eb-ae1d-dd27e2a46a0a",
 					"description": "## Feature Overview\n\n### Summary\n\nProvide a way to retrieve all books in a user's wishlist.\n\n### Rationale\n\n- **Motivation**: Users will want to view the books they've added to their wishlists.\n    \n- **Functionality**: By giving the wishlist ID, a JSON list of all books in that wishlist will be returned.\n    \n- **Impact**: Affects the `wishlist` and `books` tables, and possibly other services that utilize book data.\n    \n\n### Acceptance Criteria\n\n- New endpoint: `GET /wishlist/books`\n    \n- Parameters Sent: `Wishlist Id`\n    \n- Successful response: JSON list of books\n    \n\n### Additional Information\n\nConsider pagination if wishlists can get extensive. Also, ensure that the returned data is structured efficiently for front-end consumption."
 				}
 			],
-			"id": "27c91eb0-729f-41d4-923c-75dff48b2586",
-			"description": "Management \n\nUsers can create and have 3 different wish lists which can have books moved to from the primary list.\n\n<img src=\"https://content.pstmn.io/e28b7e09-6363-4157-8ca5-c926d4e2be44/aW1hZ2UucG5n\" alt=\"\" height=\"668\" width=\"960\">"
+			"description": "Users can create and have 3 different wish lists which can have books moved to  \nfrom the primary list."
+		},
+		{
+			"name": "Book Rating and Commenting",
+			"item": [
+				{
+					"name": "API 1 - leave rating on a book.",
+					"item": [
+						{
+							"name": "201 - rating created",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/rating/book?rating=5&userID=1&bookID=2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"rating",
+										"book"
+									],
+									"query": [
+										{
+											"key": "rating",
+											"value": "5"
+										},
+										{
+											"key": "userID",
+											"value": "1"
+										},
+										{
+											"key": "bookID",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "API 2 - leave comment on a book.",
+					"item": [
+						{
+							"name": "201 - comment created",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/comments/book?comment=Really great book!&userID=2&bookID=1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"comments",
+										"book"
+									],
+									"query": [
+										{
+											"key": "comment",
+											"value": "Really great book!"
+										},
+										{
+											"key": "userID",
+											"value": "2"
+										},
+										{
+											"key": "bookID",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "API 3 - retrieve list of comments for a book.",
+					"item": [
+						{
+							"name": "200 - comments retrieved",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/books/comments/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"books",
+										"comments",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "API 4 - retrieve average rating of a book.",
+					"item": [
+						{
+							"name": "200 - average rating retrieved",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/books/average-rating/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"books",
+										"average-rating",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"description": "Users can rate AND comment on books they’ve purchased to help others in their  \nselection"
+		},
+		{
+			"name": "Shopping Cart",
+			"item": [
+				{
+					"name": "API 1 - Display subtotal of all books in shopping cart",
+					"item": [
+						{
+							"name": "200 - Get subtotal from existing cart",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/cart/subtotal/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"cart",
+										"subtotal",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "500 - Trying to find subtotal from non-existent cart",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/cart/subtotal/10",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"cart",
+										"subtotal",
+										"10"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "## Feature Overview\n\n### Summary\n\nImplement a functionality in the Bookstore API that allows users to retrieve the subtotal price of all items in their shopping cart.\n\n### Rationale\n\n- **Motivation**: Users need an overview of their potential expenses before making a purchase.\n    \n- **Functionality**: By providing the subtotal of items, users can make informed decisions about their purchases.\n    \n- **Impact**: This will affect the shopping cart endpoint and potentially interact with the book prices in the database.\n    \n\n### Acceptance Criteria\n\n- Endpoint to fetch the subtotal for a user based on User Id.\n    \n- Should return a calculated subtotal based on current book prices.\n    \n\n### Acceptance Test Cases:\n\n- Test Case 1: If a valid User Id is provided, then the correct subtotal amount is returned.\n    \n- Test Case 2: If an invalid User Id is given, then an appropriate error message is returned.\n    \n\n### Additional Information\n\nEnsure the subtotal considers any discounts or promotions currently active."
+				},
+				{
+					"name": "API 2 - Add book to shopping cart",
+					"item": [
+						{
+							"name": "200 - Add book to cart of existing user",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/cart/add-book?bookID=1&userID=2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"cart",
+										"add-book"
+									],
+									"query": [
+										{
+											"key": "bookID",
+											"value": "1"
+										},
+										{
+											"key": "userID",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "404 - Add book to cart of non-existing user",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/cart/add-book?bookID=1&userID=10",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"cart",
+										"add-book"
+									],
+									"query": [
+										{
+											"key": "bookID",
+											"value": "1"
+										},
+										{
+											"key": "userID",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "404 - Add non-existent book to cart of existing user",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/cart/add-book?bookID=10&userID=1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"cart",
+										"add-book"
+									],
+									"query": [
+										{
+											"key": "bookID",
+											"value": "10"
+										},
+										{
+											"key": "userID",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "## Feature Overview\n\n### Summary\n\nEnable users to add a specific book to their shopping cart using the Bookstore API.\n\n### Rationale\n\n- **Motivation**: To allow users to select books they intend to purchase.\n    \n- **Functionality**: Enhancing user experience by allowing book selections for purchase.\n    \n- **Impact**: Affects the shopping cart endpoint and book database interactions.\n    \n\n### Acceptance Criteria\n\n- Endpoint to add a book based on Book Id and User Id.\n    \n- No response data is returned but a success message can be considered.\n    \n\n### Acceptance Test Cases:\n\n- Test Case 1: If valid Book Id and User Id are provided, then the book is added to the cart.\n    \n- Test Case 2: If an invalid Book Id or User Id is provided, return an error message.\n    \n\n### Additional Information\n\nConsider potential edge cases like adding a book that's already in the cart."
+				},
+				{
+					"name": "API 3 - Retrieve list of books in the shopping cart",
+					"item": [
+						{
+							"name": "200 - List all books from existent user",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/cart/list-books/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"cart",
+										"list-books",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "404 - List all books from non-existent user",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/cart/list-books/5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"cart",
+										"list-books",
+										"5"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "## Feature Overview\n\n### Summary\n\nProvide functionality for users to view a list of books currently in their shopping cart.\n\n### Rationale\n\n- **Motivation**: Users need to review their selections before making a purchase.\n    \n- **Functionality**: Allows users to see what they've selected, possibly making adjustments.\n    \n- **Impact**: Affects the shopping cart endpoint and database interactions to fetch the book details.\n    \n\n### Acceptance Criteria\n\n- Endpoint to fetch a list of books for a user based on User Id.\n    \n- Should return a list of Book Objects.\n    \n\n### Acceptance Test Cases:\n\n- Test Case 1: If a valid User Id is given, a list of books in the cart is returned.\n    \n- Test Case 2: If the cart is empty, return an appropriate message.\n    \n\n### Additional Information\n\nConsider performance implications if the cart has a lot of books."
+				},
+				{
+					"name": "API 4 - Delete a book from the shopping cart",
+					"item": [
+						{
+							"name": "200 - remove book from a cart",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/cart/delete-book?bookID=3&userID=1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"cart",
+										"delete-book"
+									],
+									"query": [
+										{
+											"key": "bookID",
+											"value": "3"
+										},
+										{
+											"key": "userID",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "404 - remove non-existent book in a cart",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/cart/delete-book?bookID=4&userID=1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"cart",
+										"delete-book"
+									],
+									"query": [
+										{
+											"key": "bookID",
+											"value": "4"
+										},
+										{
+											"key": "userID",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "404 - remove from non-existent cart",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/cart/delete-book?bookID=1&userID=5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"cart",
+										"delete-book"
+									],
+									"query": [
+										{
+											"key": "bookID",
+											"value": "1"
+										},
+										{
+											"key": "userID",
+											"value": "5"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "## Feature Overview\n\n### Summary\n\nImplement a feature allowing users to remove a specific book from their shopping cart.\n\n### Rationale\n\n- **Motivation**: Users might change their mind and decide not to purchase a specific book.\n    \n- **Functionality**: Enhances user experience by providing flexibility in their purchase choices.\n    \n- **Impact**: Affects the shopping cart endpoint and the corresponding database interactions.\n    \n\n### Acceptance Criteria\n\n- Endpoint to delete a book based on Book Id and User Id.\n    \n- No data is returned, but a success message can be considered.\n    \n\n### Acceptance Test Cases:\n\n- Test Case 1: If valid Book Id and User Id are provided, the book is removed from the cart.\n    \n- Test Case 2: If the book is not in the cart, return an appropriate message.\n    \n\n### Additional Information\n\nEnsure all database interactions are handled safely to avoid data loss."
+				}
+			],
+			"description": "Users can manage items in a shopping cart for immediate or future\n\nPurchase"
+		},
+		{
+			"name": "Book Browsing and Sorting",
+			"item": [
+				{
+					"name": "API 1 - Retrieve List of Books by Genre",
+					"item": [
+						{
+							"name": "200 - List books by genre",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/books/list-by-genre/Science%20Fiction",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"books",
+										"list-by-genre",
+										"Science%20Fiction"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "200 - List books by genre - 2",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/books/list-by-genre/Thriller",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"books",
+										"list-by-genre",
+										"Thriller"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "200 - List books of non-existent genre",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/books/list-by-genre/Romance",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"books",
+										"list-by-genre",
+										"Romance"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "## Feature Overview\n\n### Summary\n\nGiven a specific genre, return a list of books in the genre. Also implement a genre to the book class.\n\n### Rationale\n\n- **Motivation**: To be able to sort by genre. It should improve the user's experience using the book store.\n    \n- **Functionality**: Adds a genre to the book class. Allows users to be able to sort by genre of book.\n    \n- **Impact**: It will affect the book class and probably a new class where the different types of search functions can be implemented.\n    \n\n### Acceptance Criteria\n\n- A GET request that works on genres.\n    \n- Returns a JSON list of books\n    \n\n### Acceptance Test Cases:\n\n- Be able to sort by genre given an empty genre input\n    \n- Be able to deal with an input that has typos in it\n    \n- Be able to sort by genre given the user input the genre correctly"
+				},
+				{
+					"name": "API 2 - Retrieve list of Top Sellers",
+					"item": [
+						{
+							"name": "200 - List top 10 in Descending order",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/books/list-top-10",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"books",
+										"list-top-10"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "## Feature Overview\n\n### Summary\n\nRetrieve list of Top Sellers\n\n### Rationale\n\n- **Motivation**: Allows the user to be able to look at the most popular books by genre\n    \n- **Functionality**: HTTP GET request that lists the top 10 most popular books\n    \n- **Impact**: Adds a category to books that keeps track of how many books have been purchased\n    \n\n### Acceptance Criteria\n\nList the specific conditions that must be met for this feature to be considered complete. This might include:\n\n- Book sale tracker\n    \n- HTTP GET request that outputs a JSON list of book objects based off of which have sold the most.\n    \n\n### Acceptance Test Cases:\n\n- Test Case 1: If the user inputs a genre, then the function will output a list of the most popular books\n    \n- Test Case 2: if the user doesn't input a genre, the function will give an error\n    \n- Test Case 3: if the user makes a typo, the function will let the user know"
+				},
+				{
+					"name": "API 3 - Sort Books by Rating",
+					"item": [
+						{
+							"name": "200 - List Books with rating greater than or equal",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/books/rating/2.5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"books",
+										"rating",
+										"2.5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "201 - Create rating - 1",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/rating/book?rating=5&userID=2&bookID=2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"rating",
+										"book"
+									],
+									"query": [
+										{
+											"key": "rating",
+											"value": "5"
+										},
+										{
+											"key": "userID",
+											"value": "2"
+										},
+										{
+											"key": "bookID",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "201 - Create rating - 2",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/rating/book?rating=5&userID=2&bookID=1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"rating",
+										"book"
+									],
+									"query": [
+										{
+											"key": "rating",
+											"value": "5"
+										},
+										{
+											"key": "userID",
+											"value": "2"
+										},
+										{
+											"key": "bookID",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "## Feature Overview\n\n### Summary\n\nAllows the user to sort books higher than or equal to a rating.\n\n### Rationale\n\n- **Motivation**: Allows the user to find top rated books.\n    \n- **Functionality**: Adds a rating characteristic to the book and uses a GET request to return all books higher than or equal to a rating.\n    \n- **Impact**: It will affect the book class and the class where all the requests on the API are.\n    \n\n### Acceptance Criteria\n\nList the specific conditions that must be met for this feature to be considered complete. This might include:\n\n- It will be a working filter that outputs a list of all books with the desired rating.\n    \n- HTTP GET request that takes in the desired rating and outputs a JSON list of books with that rating.\n    \n\n### Acceptance Test Cases:\n\n- Test Case 1: If the user does not input a desired rating, then the books will display like normal.\n    \n- Test Case 2: If the user inputs a rating, all books with a rating higher than or equal to that rating will be returned in order from top rating to lowest rating.\n    \n- Test Case 3: If the user deselects the rating, the books will return to displaying like normal."
+				},
+				{
+					"name": "API 4 - Discount book by Publisher",
+					"item": [
+						{
+							"name": "200 - Discount all books by publisher",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/books/author/discount-by-publisher?discountRate=20&publisherName=St. Martin's Press",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"books",
+										"author",
+										"discount-by-publisher"
+									],
+									"query": [
+										{
+											"key": "discountRate",
+											"value": "20"
+										},
+										{
+											"key": "publisherName",
+											"value": "St. Martin's Press"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "404 - Discount all books by non-publisher",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/books/author/discount-by-publisher?discountRate=50&publisherName=Tony",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"books",
+										"author",
+										"discount-by-publisher"
+									],
+									"query": [
+										{
+											"key": "discountRate",
+											"value": "50"
+										},
+										{
+											"key": "publisherName",
+											"value": "Tony"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "## Feature Overview\n\n### Summary\n\nAllows the bookstore owner to discount all books by a certain publisher by some percent.\n\n### Rationale\n\n- **Motivation**: Allows the bookstore owner to have a sale.\n    \n- **Functionality**: Uses an HTTP PUT request or a PATCH request to update the price of the book.\n    \n- **Impact**: It will affect the book class.\n    \n\n### Acceptance Criteria\n\nList the specific conditions that must be met for this feature to be considered complete. This might include:\n\n- The bookstore will display the new price of the book\n    \n- The bookstore will display the old price of the book crossed out with an indicator of how much % off the book is.\n    \n- The command will update the price of all books made by the publisher.\n    \n- Maybe have a safety that will notify the publisher if they are inputting a sale price more than a certain number. (not required, but I think it'd be useful)\n    \n\n### Acceptance Test Cases:\n\n- Test Case 1: If the publisher inputs the % sale they want to discount, then the price will update for all books made by that publisher.\n    \n- Test Case 2: The data will display nicely and display the former price of the book crossed out, the sale %, and the new price.\n    \n- Test Case 3: If the publisher inputs a high %, issue a warning and allow the publisher to accept the percent they input.\n    \n\n### Additional Information\n\nInclude any other relevant notes, dependencies, or concerns related to this feature. This could be related to testing, potential risks, or any other important context."
+				}
+			],
+			"description": "Users will have a simple and enjoyable way to discover new books and  \nAuthors and sort results."
+		},
+		{
+			"name": "Profile Management",
+			"item": [
+				{
+					"name": "API 1 - Create a User with username, password and optional fields",
+					"item": [
+						{
+							"name": "201 - Create user when details provided.",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"milica_pumpaloska\",\n    \"password\": \"password123\",\n    \"name\": \"Milica Pumpaloska\",\n    \"emailAddress\": \"milica.pumpaloska@example.com\",\n    \"homeAddress\": \"123 Main St, Springfield, IL\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/user/create",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "500 - Create user with non-unique details.",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"john_doe\",\n    \"password\": \"password123\",\n    \"name\": \"John Doe\",\n    \"emailAddress\": \"john.doe@example.com\",\n    \"homeAddress\": \"123 Main St, Springfield, IL\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/user/create",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"create"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "**Feature Overview**  \nCreate user profile functionality with various fields\n\n**Summary**  \nCreate a User with username, password and optional fields (name, email  \naddress, home address\n\n**Rationale**\n\n- **Motivation**: Users don't want to re enter the same information each time they order books\n    \n- **Functionality**: By getting the users information and saving it there profile will be created and saved on the database.\n    \n- **Impact**: Will impact profile tables and other services that include profile data\n    \n\n**Acceptance Criteria**\n\n- List the specific conditions that must be met for this feature to be considered complete. This might include:\n    \n- The user can enter a user name which will be stored on a database\n    \n- The user can enter a first name and last name which will be stored on a database\n    \n- The user can enter a password which will be stored on a database\n    \n- The user can enter an address which will be stored on a database\n    \n- The user will click on a save button to persist the info on a database\n    \n- The users will receive a success message.\n    \n\n**Acceptance Test Cases:**\n\n1. Go to the create profile screen, fill out a username and password (must adhere to security standards), and click save.\n    \n2. A confirmation screen will let you know that the account was created.\n    \n3. Verification of the database will show that the account was created."
+				},
+				{
+					"name": "API 2 - Retrieve a User Object and its fields by their username",
+					"item": [
+						{
+							"name": "200 - Get details of user by providing username",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/user/get-details/Janey1993",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"get-details",
+										"Janey1993"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "## Feature Overview\n\n### Summary\n\nThis feature aims to enable the retrieval of a user's details by providing their username as input for the Bookstore API.\n\n### Rationale\n\n- **Motivation**: Users and administrators need a convenient way to access user information by username.\n    \n- **Functionality**: This feature will allow users to retrieve a user's details in JSON format using a GET request with a username parameter.\n    \n- **Impact**: This feature will impact the API endpoints and responses related to user retrieval.\n    \n\n### Acceptance Criteria\n\nTo consider this feature complete, the following conditions must be met:\n\n- Implement a new endpoint for user retrieval using a GET request with a username parameter.\n    \n- The endpoint should return a JSON User object containing user details.\n    \n- Proper error handling and responses must be implemented in case the requested username is not found.\n    \n\n### Acceptance Test Cases:\n\n- **Test Case 1:** Send a GET request to the user retrieval endpoint with a valid username parameter. Ensure that the API returns the expected JSON User object.\n    \n- **Test Case 2:** Send a GET request to the user retrieval endpoint with an invalid or non-existent username. Confirm that the API returns an appropriate error response indicating that the user does not exist."
+				},
+				{
+					"name": "API 3 - Update the user and any of their fields except for mail",
+					"item": [
+						{
+							"name": "200 - Change user details of username",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"password\": \"JashaMakedoniaaa\",\n    \"name\": \"Janizmdssd\",\n    \"homeAddress\": \"12345 corner street\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/user/update/Janey1993",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"update",
+										"Janey1993"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "500 - Change user details of non-username",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"password\": \"JashaMakedonia\",\n    \"name\": \"Janizm\",\n    \"homeAddress\": \"12345 corner street\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/user/update/Janey19932",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"user",
+										"update",
+										"Janey19932"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "## Feature Overview\n\n### Summary\n\nThis feature enables users to update their profile information or specific user fields (except for email) using the Bookstore API.\n\n### Rationale\n\n- **Motivation**: Users may need to modify their profile information, and this feature provides a mechanism for such updates.\n- **Functionality**: Users can send a PUT or PATCH request to update their user profile using their username as a key lookup. Any user field, except for email, can be updated with a new parameter value.\n- **Impact**: This feature will impact the API endpoints and database records associated with user profile updates.\n    \n\n### Acceptance Criteria\n\nTo consider this feature complete, the following conditions must be met:\n\n- Implement a PUT or PATCH endpoint for user profile updates, using the username as a key lookup value.\n- Allow users to update any user field except for the email field.\n- Ensure that the API responds appropriately to indicate the success of the update operation.\n- Proper error handling must be in place, including cases where the provided username is not found.\n    \n\n### Acceptance Test Cases:\n\n- **Test Case 1 (PUT):** Send a PUT request to update a user's profile information, including fields like username, name, and address. Confirm that the user's profile is updated, and the API responds with a success message.\n- **Test Case 2 (PATCH):** Send a PATCH request to modify a user's specific field (e.g., username, name) while leaving other fields intact. Verify that the requested field is updated, and the API provides a success response.\n- **Test Case 3 (Error Handling):** Attempt to update a user's email field using either PUT or PATCH. Ensure that the API responds with an error message indicating that the email field cannot be modified.\n    \n\n### Additional Information\n\n- Implement validation to ensure that only authorized users can update their profiles, and they can only modify their own profiles.\n- Consider implementing a versioning or change tracking mechanism to keep a record of profile updates for auditing purposes.\n- Coordinate with front-end developers to integrate user profile update functionality into user interfaces and forms."
+				},
+				{
+					"name": "API 4 - Create Credit Card that belongs to a User",
+					"item": [
+						{
+							"name": "200 - add credit card to user",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"creditCardNumber\": \"4111111111111111\",\n    \"expirationDate\": \"2024-08-31\",\n    \"ccv\": \"123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/credit-card/add?username=Johnny123",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"credit-card",
+										"add"
+									],
+									"query": [
+										{
+											"key": "username",
+											"value": "Johnny123"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "500 - add credit card to non-existent user",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"creditCardNumber\": \"4111111111111111\",\n    \"expirationDate\": \"2024-08-31\",\n    \"ccv\": \"123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/credit-card/add?username=Johnny123223",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"credit-card",
+										"add"
+									],
+									"query": [
+										{
+											"key": "username",
+											"value": "Johnny123223"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "## Feature Overview\n\n### Summary\n\nThis feature allows the creation of a credit card that belongs to a user within the Bookstore API.\n\n### Rationale\n\n- **Motivation**: Users often need to associate credit cards with their accounts to make online payments.\n    \n- **Functionality**: Users can create a credit card by providing their username and credit card details.\n    \n- **Impact**: This feature will impact the API endpoints and database records related to user credit cards.\n    \n\n### Acceptance Criteria\n\nTo consider this feature complete, the following conditions must be met:\n\n- Implement an HTTP POST endpoint for creating a credit card that belongs to a user.\n    \n- The request must include the user's username and a Credit Card Object containing credit card details (e.g., card number, expiration date, CVV).\n    \n- The system should validate and securely store the credit card information.\n    \n- Ensure that the API responds appropriately to indicate the success of the credit card creation.\n    \n\n### Acceptance Test Cases:\n\n- **Test Case 1:** Send a POST request to create a credit card for a user, providing valid username and credit card details. Verify that the credit card is associated with the user, and the API responds with a success message.\n    \n- **Test Case 2:** Attempt to create a credit card for a non-existent user. Ensure that the API responds with an error indicating that the user does not exist.\n    \n- **Test Case 3:** Validate that the credit card information is securely stored and encrypted in the database to protect user data.\n    \n\n### Additional Information\n\n- Implement strict security measures to protect sensitive credit card information, including encryption and compliance with relevant data protection regulations (e.g., PCI DSS).\n    \n- Consider implementing validation checks to ensure that the credit card details provided are valid and adhere to industry standards.\n    \n- Coordinate with front-end developers to provide a user-friendly interface for users to add and manage their credit cards."
+				}
+			],
+			"description": "Users can create and maintain their profiles rather than enter in  \ntheir information each time they order"
+		},
+		{
+			"name": "Book Details",
+			"item": [
+				{
+					"name": "API 1 - Create author",
+					"item": [
+						{
+							"name": "201 - Create author by providing all details",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"firstName\": \"Rheaden\",\n    \"lastName\": \"Rheaden Jackson\",\n    \"biography\": \"Rheaden is a CS major at FIU.\",\n    \"publisher\": \"Simon & Schuster\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/authors/create",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"authors",
+										"create"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "API 2 - Create a book",
+					"item": [
+						{
+							"name": "201 - Create a book by providing book details",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"isbn\": \"978-7856935217\",\n  \"title\": \"Rheaden;s Sample Book 2\",\n  \"author\": {\n    \"id\": 7\n  },\n  \"genre\": \"Fiction\",\n  \"description\": \"Rheaden is creating a book 2\",\n  \"publisher\": \"Simon & Schuster\",\n  \"publishingDate\": \"2023-10-25\",\n  \"price\": 9.99,\n  \"stockCount\": 50,\n  \"copiesSold\": 147\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/books/create",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"books",
+										"create"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "API 3 - Get a book by ISBN",
+					"item": [
+						{
+							"name": "200 - Get book details by ISBN",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/books/find-by-isbn/978-3423230124",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"books",
+										"find-by-isbn",
+										"978-3423230124"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "API 4 - Get books details by authorID",
+					"item": [
+						{
+							"name": "200 - Get book details by author.",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/books/find-by-author/7",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"books",
+										"find-by-author",
+										"7"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"description": "Users can see informative and enticing details about a book"
 		}
 	]
 }

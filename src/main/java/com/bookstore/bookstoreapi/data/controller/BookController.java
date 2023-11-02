@@ -30,15 +30,13 @@ public class BookController {
   public ResponseEntity<Book> createABook(@RequestBody Book book) {
 
     Optional<Book> createdBook = bookService.createABook(book);
-    if (createdBook.isEmpty()) {
 
-      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-
-    return new ResponseEntity<>(createdBook.get(), HttpStatus.CREATED);
+    return createdBook
+        .map(value -> new ResponseEntity<>(value, HttpStatus.CREATED))
+        .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
   }
 
-  @GetMapping("/{isbn}")
+  @GetMapping("/find-by-isbn/{isbn}")
   public ResponseEntity<List<Book>> findByIsbn(@PathVariable String isbn) {
 
     List<Book> books = bookService.findByIsbn(isbn);
@@ -51,20 +49,18 @@ public class BookController {
     return new ResponseEntity<>(books, HttpStatus.OK);
   }
 
-  @GetMapping("/byAuthor/{authorId}")
+  @GetMapping("/find-by-author/{authorId}")
   public ResponseEntity<List<Book>> getBooksByAuthor(@PathVariable Long authorId) {
 
     List<Book> books = bookService.getBooksByAuthorId(authorId);
-
     if (books.isEmpty()) {
-
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     return new ResponseEntity<>(books, HttpStatus.OK);
   }
 
-  @GetMapping("/{genre}/listBooksByGenre")
+  @GetMapping("/list-by-genre/{genre}")
   public ResponseEntity<List<Book>> listBooksByGenre(@PathVariable String genre) {
 
     Optional<List<Book>> listBooksByGenre = bookService.listBooksByGenre(genre);
@@ -74,7 +70,7 @@ public class BookController {
         .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
   }
 
-  @GetMapping("/top10")
+  @GetMapping("/list-top-10")
   public ResponseEntity<List<Book>> getTop10Books() {
 
     List<Book> top10Books = bookService.getTop10Books();
@@ -90,7 +86,7 @@ public class BookController {
     return ResponseEntity.ok(books);
   }
 
-  @GetMapping("/{bookID}/comments")
+  @GetMapping("/comments/{bookID}")
   public ResponseEntity<List<Comment>> listCommentsFromBook(@PathVariable Long bookID) {
 
     Optional<Book> findBook = bookService.findBookId(bookID);
@@ -103,7 +99,7 @@ public class BookController {
     return ResponseEntity.ok(new ArrayList<>(book.getComments()));
   }
 
-  @GetMapping("/{bookID}/average rating")
+  @GetMapping("/average-rating/{bookID}")
   public ResponseEntity<Double> calculateAvgRating(@PathVariable Long bookID) {
 
     Optional<Book> findBook = bookService.findBookId(bookID);
@@ -122,7 +118,7 @@ public class BookController {
     return ResponseEntity.ok(sum / ratings.size());
   }
 
-  @PutMapping("/author/discountBooks")
+  @PutMapping("/author/discount-by-publisher")
   public ResponseEntity<Void> discountBooksOfPublisher(
       @RequestParam Double discountRate, @RequestParam String publisherName) {
 

@@ -61,7 +61,7 @@ public class DataInitializer {
       author1.setLastName("Verne");
       author1.setBiography(
           "Jules Verne, (born February 8, 1828, Nantes, France—died March 24, 1905, Amiens), prolific French author whose writings laid much of the foundation of modern science fiction.");
-      author1.setPublisher("Simon & Schuster");
+      author1.setPublisher(BookstoreConstants.SIMON_AND_SCHUSTER);
       authorRepository.save(author1);
 
       Author author2 = new Author();
@@ -69,7 +69,7 @@ public class DataInitializer {
       author2.setLastName("Wells");
       author2.setBiography(
           "H.G. Wells, in full Herbert George Wells, (born September 21, 1866, Bromley, Kent, England—died August 13, 1946, London), English novelist, journalist, sociologist, and historian.");
-      author2.setPublisher("Simon & Schuster");
+      author2.setPublisher(BookstoreConstants.SIMON_AND_SCHUSTER);
       authorRepository.save(author2);
 
       Author author3 = new Author();
@@ -85,7 +85,7 @@ public class DataInitializer {
       author4.setLastName("Hoover");
       author4.setBiography(
           "Colleen Hoover, (born December 11, 1979, Sulphur Springs, Texas, U.S.), American author who became a publishing phenomenon in the early 21st century and is known for hugely popular books that typically feature romance and dramatic plot twists.");
-      author4.setPublisher("Simon & Schuster");
+      author4.setPublisher(BookstoreConstants.SIMON_AND_SCHUSTER);
       authorRepository.save(author4);
 
       Author author5 = new Author();

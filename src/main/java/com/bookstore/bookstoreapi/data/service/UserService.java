@@ -38,6 +38,7 @@ public class UserService {
     if (userUpdateDto.getHomeAddress() != null) {
       user.setHomeAddress(userUpdateDto.getHomeAddress());
     }
+
     userRepository.save(user);
   }
 }

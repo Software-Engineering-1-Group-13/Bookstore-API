@@ -23,7 +23,7 @@ public class CartController {
 
   @Autowired CartService cartService;
 
-  @GetMapping("/{cartID}/subtotal")
+  @GetMapping("/subtotal/{cartID}")
   public ResponseEntity<Double> getCartSubtotal(@PathVariable Long cartID) {
 
     Optional<Double> getCartSubtotal = cartService.getCartSubtotal(cartID);
@@ -33,7 +33,7 @@ public class CartController {
         .orElseGet(() -> ResponseEntity.notFound().build());
   }
 
-  @PostMapping("/addBook")
+  @PostMapping("/add-book")
   public ResponseEntity<Void> addBookToCart(@RequestParam Long bookID, @RequestParam Long userID) {
 
     Optional<Cart> addBookToCart = cartService.addBookToCart(bookID, userID);
@@ -44,7 +44,7 @@ public class CartController {
     return new ResponseEntity<>(HttpStatus.OK);
   }
 
-  @GetMapping("/{userID}/listBooks")
+  @GetMapping("/list-books/{userID}")
   public ResponseEntity<List<Book>> listBooksInCart(@PathVariable Long userID) {
 
     Optional<Cart> listBooksInCart = cartService.listBooksInCart(userID);
@@ -55,7 +55,7 @@ public class CartController {
         .orElseGet(() -> ResponseEntity.notFound().build());
   }
 
-  @DeleteMapping("/deleteBook")
+  @DeleteMapping("/delete-book")
   public ResponseEntity<Void> removeBookFromCart(
       @RequestParam Long bookID, @RequestParam Long userID) {
 

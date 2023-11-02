@@ -20,9 +20,7 @@ After installing all the required software, do the following:
 - run this command
   - ```gradlew bootRun```
 - open chrome and paste one of the following links
-  - [http://localhost:8080/](http://localhost:8080/) - returns string `Hello to Bookstore API app`
-  - [http://localhost:8080/test](http://localhost:8080/test) - returns red string `Hello, Bookstore!` 
-  - [http://localhost:8080/wishlist/1/books](http://localhost:8080/wishlist/1/books) - returns dummy data for `wishlist 1`
+  - [http://localhost:8080/](http://localhost:8080/) - returns a welcome page.
 
 - if you encounter any issue please contact me.
 

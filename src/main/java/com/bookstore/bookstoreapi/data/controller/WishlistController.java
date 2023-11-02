@@ -35,7 +35,7 @@ public class WishlistController {
     return new ResponseEntity<>(HttpStatus.CREATED);
   }
 
-  @PostMapping("/book")
+  @PostMapping("/add-book")
   public ResponseEntity<Void> addBookToWishlist(
       @RequestParam Long bookID, @RequestParam Long wishlistID) {
 
@@ -47,7 +47,7 @@ public class WishlistController {
     return new ResponseEntity<>(HttpStatus.OK);
   }
 
-  @DeleteMapping("/removeBook")
+  @DeleteMapping("/remove-book")
   public ResponseEntity<Void> removeBookFromWishlist(
       @RequestParam Long bookID, @RequestParam Long wishlistID) {
 
@@ -60,7 +60,7 @@ public class WishlistController {
     return new ResponseEntity<>(HttpStatus.OK);
   }
 
-  @GetMapping("/{wishlistID}/books")
+  @GetMapping("/list-books/{wishlistID}")
   public ResponseEntity<List<Book>> listBooksFromWishlist(@PathVariable Long wishlistID) {
 
     Optional<Wishlist> listedBooksFromWishlist = wishlistService.listBooksFromWishlist(wishlistID);

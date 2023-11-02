@@ -73,7 +73,7 @@ class WishlistControllerTest {
 
     mockMvc
         .perform(
-            post("/wishlist/book")
+            post("/wishlist/add-book")
                 .param("bookID", "1")
                 .param("wishlistID", "1")
                 .contentType(MediaType.APPLICATION_JSON))
@@ -86,7 +86,7 @@ class WishlistControllerTest {
 
     mockMvc
         .perform(
-            post("/wishlist/book")
+            post("/wishlist/add-book")
                 .param("bookID", "1")
                 .param("wishlistID", "1")
                 .contentType(MediaType.APPLICATION_JSON))
@@ -101,7 +101,7 @@ class WishlistControllerTest {
 
     mockMvc
         .perform(
-            delete("/wishlist/removeBook")
+            delete("/wishlist/remove-book")
                 .param("bookID", "1")
                 .param("wishlistID", "1")
                 .contentType(MediaType.APPLICATION_JSON))
@@ -114,7 +114,7 @@ class WishlistControllerTest {
 
     mockMvc
         .perform(
-            delete("/wishlist/removeBook")
+            delete("/wishlist/remove-book")
                 .param("bookID", "1")
                 .param("wishlistID", "1")
                 .contentType(MediaType.APPLICATION_JSON))
@@ -125,13 +125,13 @@ class WishlistControllerTest {
   void testListBooksFromWishlist_Success() throws Exception {
     Wishlist wishlist = new Wishlist();
     Set<Book> books = new HashSet<>();
-    // Add some dummy books if you want
     wishlist.setBooks(books);
 
     when(wishlistService.listBooksFromWishlist(anyLong())).thenReturn(Optional.of(wishlist));
 
     mockMvc
-        .perform(get("/wishlist/{wishlistID}/books", 1L).contentType(MediaType.APPLICATION_JSON))
+        .perform(
+            get("/wishlist/list-books/{wishlistID}", 1L).contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$", hasSize(books.size()))); // make sure the size matches
   }

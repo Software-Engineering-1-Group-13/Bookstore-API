@@ -29,7 +29,7 @@ public class UserController {
     return new ResponseEntity<>(HttpStatus.CREATED);
   }
 
-  @GetMapping("/getUserDetails/{username}")
+  @GetMapping("/get-details/{username}")
   public ResponseEntity<User> getUserDetailsByUsername(@PathVariable String username) {
 
     Optional<User> user = userService.getUserDetailsByUsername(username);

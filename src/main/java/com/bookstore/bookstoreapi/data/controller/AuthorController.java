@@ -21,10 +21,9 @@ public class AuthorController {
   public ResponseEntity<Author> createAuthor(@RequestBody Author author) {
 
     Optional<Author> createdAuthor = authorService.createAuthor(author);
-    if (createdAuthor.isEmpty()) {
-      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
 
-    return new ResponseEntity<>(createdAuthor.get(), HttpStatus.CREATED);
+    return createdAuthor
+        .map(value -> new ResponseEntity<>(value, HttpStatus.CREATED))
+        .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
   }
 }
